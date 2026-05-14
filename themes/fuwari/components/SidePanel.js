@@ -73,7 +73,7 @@ const SidePanel = props => {
 
       {siteConfig('FUWARI_WIDGET_LATEST_POSTS', true, CONFIG) && latestPosts.length > 0 && (
         <section className='fuwari-card p-5'>
-          <h3 className='text-sm font-semibold mb-3 tracking-wide uppercase text-[var(--fuwari-muted)]'>
+          <h3 className='text-base font-semibold mb-3 tracking-wide uppercase text-[var(--fuwari-muted)]'>
             {locale?.COMMON?.LATEST_POSTS || '最新发布'}
           </h3>
           <div className='space-y-2'>
@@ -81,7 +81,7 @@ const SidePanel = props => {
               <SmartLink
                 key={p.id}
                 href={p.href || `/${p.slug}`}
-                className='block text-sm leading-6 hover:text-[var(--fuwari-primary)]'>
+                className='block text-[15px] leading-6 hover:text-[var(--fuwari-primary)]'>
                 {p.title}
               </SmartLink>
             ))}
@@ -91,7 +91,7 @@ const SidePanel = props => {
 
       {siteConfig('FUWARI_WIDGET_CATEGORY_LIST', true, CONFIG) && categoryOptions.length > 0 && (
         <section className='fuwari-card p-5'>
-          <h3 className='fuwari-section-title text-sm font-semibold mb-3 tracking-wide uppercase text-[var(--fuwari-muted)]'>
+          <h3 className='fuwari-section-title text-base font-semibold mb-3 tracking-wide uppercase text-[var(--fuwari-muted)]'>
             {locale?.COMMON?.CATEGORY || '分类'}
           </h3>
           <div className='flex flex-wrap gap-2'>
@@ -109,7 +109,7 @@ const SidePanel = props => {
 
       {siteConfig('FUWARI_WIDGET_TAG_LIST', true, CONFIG) && tagOptions.length > 0 && (
         <section className='fuwari-card p-5'>
-          <h3 className='fuwari-section-title text-sm font-semibold mb-3 tracking-wide uppercase text-[var(--fuwari-muted)]'>
+          <h3 className='fuwari-section-title text-base font-semibold mb-3 tracking-wide uppercase text-[var(--fuwari-muted)]'>
             {locale?.COMMON?.TAGS || '标签'}
           </h3>
           <div className='flex flex-wrap gap-2'>

@@ -297,9 +297,9 @@ const Style = () => {
       border: 1px solid var(--fuwari-border);
       border-radius: 999px;
       color: var(--fuwari-muted);
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1;
-      padding: 0.45rem 0.75rem;
+      padding: 0.5rem 0.8rem;
     }
 
     #theme-fuwari .fuwari-title-gradient {
@@ -495,7 +495,7 @@ const Style = () => {
       border-radius: .85rem;
     }
     #theme-fuwari .fuwari-analytics-label {
-      font-size: 10px;
+      font-size: 12px;
       line-height: 1.2;
       text-transform: uppercase;
       letter-spacing: .08em;
@@ -584,8 +584,8 @@ const Style = () => {
       box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
     }
     #theme-fuwari aside .fuwari-chip {
-      font-size: 13px;
-      padding: .45rem .72rem;
+      font-size: 15px;
+      padding: .5rem .8rem;
     }
     #theme-fuwari aside .fuwari-card h3 {
       letter-spacing: .06em;
