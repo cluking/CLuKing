@@ -1,15 +1,15 @@
 {
-  "name": "notion-next",
+  "name": "cluking",
   "version": "4.9.5.2",
   "packageManager": "yarn@1.22.22",
-  "homepage": "https://github.com/tangly1024/NotionNext.git",
+  "homepage": "https://github.com/cluking/CLuKing",
   "license": "MIT",
   "engines": {
     "node": ">=20 <25"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tangly1024/NotionNext.git"
+    "url": "https://github.com/cluking/CLuKing"
   },
   "author": {
     "name": "tangly",
@@ -124,7 +124,7 @@
     "form-data": "^4.0.4"
   },
   "bugs": {
-    "url": "https://github.com/tangly/NotionNext/issues",
+    "url": "https://github.com/cluking/CLuKing/issues",
     "email": "tlyong1992@hotmail.com"
   }
 }
