@@ -37,6 +37,27 @@ const CONFIG = {
   FUWARI_POST_LIST_COVER_COL_WIDTH: 280,
 
   // ---------------------------------------------------------------------------
+  // 首页 Bento 展示区
+  // ---------------------------------------------------------------------------
+  /** 顶部品牌栏：JSON 可覆盖 title / eyebrow */
+  FUWARI_HOME_BENTO_HEADER: {
+    title: 'CLuKing',
+    eyebrow: 'ROOT / GROWTH / CODE'
+  },
+  /** 日落卡片：JSON 可覆盖 title / description */
+  FUWARI_HOME_BENTO_SUNSET: {
+    title: '向下扎根 · 向上生长',
+    description: '沉到土壤深处，把每一次热爱写成新的年轮。'
+  },
+  /** 终端卡片：JSON 可覆盖 title / prompt / text / status */
+  FUWARI_HOME_BENTO_TERMINAL: {
+    title: 'langding',
+    prompt: '~/cluking',
+    text: 'langding',
+    status: 'status: rooted · growing · online'
+  },
+
+  // ---------------------------------------------------------------------------
   // 移动端
   // ---------------------------------------------------------------------------
   /** 右侧汉堡菜单（含导航项）；关闭后小屏仅保留顶栏图标 */

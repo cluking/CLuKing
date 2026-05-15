@@ -19,6 +19,9 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import ArticleHeroCover from './components/ArticleHeroCover'
 import HeroBanner from './components/HeroBanner'
+import HomeBentoHeader from './components/HomeBentoHeader'
+import HomeSunsetCard from './components/HomeSunsetCard'
+import HomeTerminalCard from './components/HomeTerminalCard'
 import Pagination from './components/Pagination'
 import PostList from './components/PostList'
 import RightFloatArea from './components/RightFloatArea'
@@ -83,61 +86,25 @@ const LayoutBase = props => {
   )
 }
 
-const HomeIntro = ({ siteProps, locale }) => {
-  const posts = siteProps.posts || []
-  const featuredPosts = (siteProps.latestPosts?.length ? siteProps.latestPosts : posts).slice(0, 2)
-  const primaryPost = featuredPosts[0]
-  const secondaryPost = featuredPosts[1]
-  const primaryHref = primaryPost?.href || (primaryPost?.slug ? `/${primaryPost.slug}` : '/archive')
+const getConfigObject = (key, fallback) => {
+  const value = siteConfig(key, fallback, CONFIG)
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? { ...fallback, ...value }
+    : fallback
+}
+
+const HomeIntro = () => {
+  const headerConfig = getConfigObject('FUWARI_HOME_BENTO_HEADER', CONFIG.FUWARI_HOME_BENTO_HEADER)
+  const sunsetConfig = getConfigObject('FUWARI_HOME_BENTO_SUNSET', CONFIG.FUWARI_HOME_BENTO_SUNSET)
+  const terminalConfig = getConfigObject('FUWARI_HOME_BENTO_TERMINAL', CONFIG.FUWARI_HOME_BENTO_TERMINAL)
 
   return (
-    <section className='fuwari-home-intro fuwari-card p-5 md:p-6 mb-4 overflow-hidden'>
-      <div className='fuwari-snake-track' aria-hidden='true'>
-        <span className='fuwari-snake-orb fuwari-snake-orb-one' />
-        <span className='fuwari-snake-orb fuwari-snake-orb-two' />
-      </div>
-      <div className='fuwari-home-intro-main'>
-        <div className='fuwari-home-copy min-w-0'>
-          <p className='fuwari-home-kicker'>{siteConfig('AUTHOR') || siteConfig('TITLE')}</p>
-          <h1 className='fuwari-home-title'>{siteConfig('TITLE')}</h1>
-          {siteConfig('DESCRIPTION') && (
-            <p className='fuwari-home-description'>
-              {siteConfig('DESCRIPTION')}
-            </p>
-          )}
-          <div className='fuwari-home-actions'>
-            <SmartLink href={primaryHref} className='fuwari-home-action-primary'>
-              阅读精选
-              <i className='fas fa-arrow-right' aria-hidden='true' />
-            </SmartLink>
-            <SmartLink href='/archive' className='fuwari-home-action'>
-              {locale?.NAV?.ARCHIVE || '归档'}
-            </SmartLink>
-          </div>
-        </div>
-
-        <div className='fuwari-home-showcase' aria-label='精选内容'>
-          <div className='fuwari-orbit-stage' aria-hidden='true'>
-            <span className='fuwari-orbit-ring fuwari-orbit-ring-one' />
-            <span className='fuwari-orbit-ring fuwari-orbit-ring-two' />
-            <span className='fuwari-orbit-core' />
-            <span className='fuwari-orbit-dot fuwari-orbit-dot-one' />
-            <span className='fuwari-orbit-dot fuwari-orbit-dot-two' />
-            <span className='fuwari-orbit-dot fuwari-orbit-dot-three' />
-          </div>
-          <SmartLink href={primaryHref} className='fuwari-home-feature-card'>
-            <span className='fuwari-home-feature-badge'>精选阅读</span>
-            <strong>{primaryPost?.title || siteConfig('TITLE')}</strong>
-            <small>{primaryPost?.publishDay || 'Latest'}</small>
-          </SmartLink>
-          {secondaryPost && (
-            <SmartLink
-              href={secondaryPost.href || `/${secondaryPost.slug}`}
-              className='fuwari-home-note-card'>
-              <span>下一篇灵感</span>
-              <strong>{secondaryPost.title}</strong>
-            </SmartLink>
-          )}
+    <section className='fuwari-home-intro cluking-landing fuwari-card p-5 md:p-6 mb-4 overflow-hidden'>
+      <div className='cluking-bento-showcase'>
+        <HomeBentoHeader config={headerConfig} />
+        <div className='cluking-bento-grid'>
+          <HomeSunsetCard config={sunsetConfig} />
+          <HomeTerminalCard config={terminalConfig} />
         </div>
       </div>
     </section>

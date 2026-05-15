@@ -652,6 +652,292 @@ const Style = () => {
       transform: translateY(-2px) rotate(.5deg);
       border-color: color-mix(in oklab, var(--fuwari-primary) 34%, var(--fuwari-border));
     }
+    #theme-fuwari .cluking-landing {
+      position: relative;
+      border: 1px solid rgba(255, 141, 121, .26);
+      background:
+        radial-gradient(circle at 11% 16%, rgba(255, 215, 1, .18), transparent 27%),
+        radial-gradient(circle at 88% 18%, rgba(202, 30, 179, .22), transparent 32%),
+        linear-gradient(135deg, rgba(12, 12, 17, .96), rgba(35, 20, 31, .92) 48%, rgba(18, 18, 21, .97));
+      color: #fff;
+      box-shadow: 0 30px 80px rgba(20, 8, 19, .28);
+    }
+    #theme-fuwari .cluking-landing::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at 48% 48%, #000 0 40%, transparent 78%);
+      pointer-events: none;
+    }
+    #theme-fuwari .cluking-bento-showcase {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 16px;
+      min-height: 22rem;
+      padding: 16px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 215, 1, .1), transparent 25%),
+        radial-gradient(circle at 80% 12%, rgba(202, 30, 179, .16), transparent 30%),
+        rgba(7, 7, 10, .56);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06);
+    }
+    #theme-fuwari .cluking-bento-header {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: .85rem;
+      align-items: center;
+      min-width: 0;
+      min-height: 4.15rem;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 20px;
+      background: rgba(20, 20, 20, .48);
+      backdrop-filter: blur(10px);
+      padding: .85rem 1rem;
+    }
+    #theme-fuwari .cluking-bento-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .42fr) minmax(0, .58fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    #theme-fuwari .cluking-bento-card {
+      min-height: 15.5rem;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 20px;
+      background: rgba(20, 20, 20, .6);
+      backdrop-filter: blur(10px);
+    }
+    #theme-fuwari .cluking-loader {
+      display: flex;
+      width: 30px;
+      aspect-ratio: 1;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 0 14px rgba(253, 46, 36, .36));
+    }
+    #theme-fuwari .cluking-loader-mark {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    #theme-fuwari .cluking-loader-dash {
+      animation: cluking-dash-array 5s ease-in-out infinite, cluking-dash-offset 5s linear infinite;
+    }
+    #theme-fuwari .cluking-loader-spin {
+      animation: cluking-spin-dash-array 5s ease-in-out infinite, cluking-spin 5s ease-in-out infinite, cluking-dash-offset 5s linear infinite;
+      transform-origin: center;
+    }
+    #theme-fuwari .cluking-eyebrow {
+      justify-self: end;
+      color: rgba(255, 185, 168, .78);
+      font-size: .64rem;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-align: right;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    #theme-fuwari .cluking-name {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+      font-weight: 950;
+      letter-spacing: -.045em;
+      line-height: 1;
+      text-shadow:
+        0 0 18px rgba(253, 46, 36, .28),
+        0 8px 28px rgba(0, 0, 0, .32);
+    }
+    #theme-fuwari .cluking-signature-card {
+      display: flex;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+      animation: cluking-card-breathe 5s ease-in-out infinite;
+    }
+    #theme-fuwari .cluking-signature-content {
+      position: relative;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      width: 100%;
+      min-height: inherit;
+      overflow: hidden;
+      border-radius: inherit;
+      padding: 1rem;
+    }
+    #theme-fuwari .cluking-sunset-svg {
+      position: relative;
+      z-index: 1;
+      align-self: center;
+      justify-self: center;
+      width: min(100%, 14.5rem);
+      opacity: .92;
+      filter: drop-shadow(0 20px 38px rgba(253, 46, 36, .18));
+    }
+    #theme-fuwari .cluking-signature-details {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: .35rem;
+      align-self: end;
+      text-align: center;
+    }
+    #theme-fuwari .cluking-signature-title {
+      color: #ff8d79;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      line-height: 1.25;
+    }
+    #theme-fuwari .cluking-signature-body {
+      color: rgba(255, 199, 183, .78);
+      font-size: .86rem;
+      line-height: 1.65;
+    }
+    #theme-fuwari .cluking-langding-stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 1rem;
+    }
+    #theme-fuwari .cluking-glow-disc {
+      position: absolute;
+      width: min(21rem, 82%);
+      aspect-ratio: 1;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, rgba(255, 215, 1, .12), transparent 28%),
+        conic-gradient(from 120deg, rgba(202, 30, 179, .26), rgba(253, 46, 36, .32), rgba(255, 215, 1, .22), rgba(202, 30, 179, .26));
+      filter: blur(14px);
+      opacity: .72;
+      animation: cluking-glow-cycle 5s ease-in-out infinite;
+    }
+    #theme-fuwari .cluking-terminal-loader {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 24rem);
+      min-height: 13.5rem;
+      overflow: hidden;
+      box-sizing: border-box;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 1rem;
+      background:
+        linear-gradient(180deg, rgba(24, 24, 26, .86), rgba(8, 8, 10, .9)),
+        #1a1a1a;
+      color: #33ff83;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1rem;
+      box-shadow: none;
+    }
+    #theme-fuwari .cluking-terminal-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1.7em;
+      background-color: rgba(255, 255, 255, .08);
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+      padding: 0 .55em;
+      box-sizing: border-box;
+    }
+    #theme-fuwari .cluking-terminal-title {
+      float: left;
+      line-height: 1.7em;
+      color: #eee;
+      font-size: .86rem;
+    }
+    #theme-fuwari .cluking-terminal-controls {
+      float: right;
+      line-height: 1.7em;
+    }
+    #theme-fuwari .cluking-terminal-control {
+      display: inline-block;
+      width: .6em;
+      height: .6em;
+      margin-left: .4em;
+      border-radius: 50%;
+      background-color: #777;
+    }
+    #theme-fuwari .cluking-terminal-close { background-color: #e33; }
+    #theme-fuwari .cluking-terminal-minimize { background-color: #ee0; }
+    #theme-fuwari .cluking-terminal-maximize { background-color: #0b0; }
+    #theme-fuwari .cluking-terminal-screen {
+      display: grid;
+      gap: .8rem;
+      padding: 3.4rem 1.2rem 1.2rem;
+    }
+    #theme-fuwari .cluking-terminal-prompt {
+      color: rgba(255,255,255,.56);
+      font-size: .78rem;
+    }
+    #theme-fuwari .cluking-terminal-text {
+      display: inline-block;
+      width: 0;
+      max-width: max-content;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .2em solid #33ff83;
+      color: #58ff9b;
+      font-size: clamp(1.55rem, 5vw, 2.35rem);
+      font-weight: 900;
+      letter-spacing: .02em;
+      animation: cluking-type-hold 5s steps(8) infinite, cluking-blink-cursor .5s step-end infinite alternate;
+    }
+    #theme-fuwari .cluking-terminal-status {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid rgba(51, 255, 131, .28);
+      border-radius: 999px;
+      color: rgba(163, 255, 199, .82);
+      font-size: .76rem;
+      padding: .35rem .65rem;
+      background: rgba(51, 255, 131, .08);
+    }
+
+    @keyframes cluking-dash-array {
+      0% { stroke-dasharray: 0 1 359 0; }
+      52% { stroke-dasharray: 0 359 1 0; }
+      72%, 100% { stroke-dasharray: 359 1 0 0; }
+    }
+    @keyframes cluking-spin-dash-array {
+      0% { stroke-dasharray: 270 90; }
+      52% { stroke-dasharray: 0 360; }
+      72%, 100% { stroke-dasharray: 270 90; }
+    }
+    @keyframes cluking-dash-offset {
+      0% { stroke-dashoffset: 365; }
+      72%, 100% { stroke-dashoffset: 5; }
+    }
+    @keyframes cluking-spin {
+      0% { rotate: 0deg; }
+      18%, 30% { rotate: 270deg; }
+      42%, 54% { rotate: 540deg; }
+      66%, 100% { rotate: 810deg; }
+    }
+    @keyframes cluking-card-breathe {
+      0%, 100% { transform: translateY(0); filter: saturate(1); }
+      58% { transform: translateY(-3px); filter: saturate(1.12); }
+    }
+    @keyframes cluking-glow-cycle {
+      0%, 100% { transform: rotate(0deg) scale(.96); opacity: .58; }
+      68% { transform: rotate(120deg) scale(1.04); opacity: .86; }
+    }
+    @keyframes cluking-blink-cursor {
+      50% { border-right-color: transparent; }
+    }
+    @keyframes cluking-type-hold {
+      0%, 10% { width: 0; }
+      54%, 100% { width: 8ch; }
+    }
+
     #theme-fuwari .fuwari-list-head {
       display: flex;
       align-items: end;
@@ -1077,6 +1363,37 @@ const Style = () => {
       #theme-fuwari .fuwari-home-intro-main {
         grid-template-columns: 1fr;
       }
+      #theme-fuwari .cluking-landing {
+        padding: 1.15rem !important;
+      }
+      #theme-fuwari .cluking-bento-showcase {
+        min-height: 0;
+        padding: 12px;
+      }
+      #theme-fuwari .cluking-bento-header {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+      #theme-fuwari .cluking-bento-header .cluking-eyebrow {
+        grid-column: 1 / -1;
+        justify-self: start;
+        text-align: left;
+      }
+      #theme-fuwari .cluking-bento-grid {
+        grid-template-columns: 1fr;
+      }
+      #theme-fuwari .cluking-bento-card {
+        min-height: 15rem;
+      }
+      #theme-fuwari .cluking-name {
+        font-size: clamp(1.75rem, 8vw, 2.65rem);
+      }
+      #theme-fuwari .cluking-signature-details {
+        margin-inline: auto;
+        max-width: 20rem;
+      }
+      #theme-fuwari .cluking-terminal-loader {
+        width: min(100%, 28rem);
+      }
       #theme-fuwari .fuwari-home-showcase {
         min-height: 17rem;
       }
@@ -1126,6 +1443,50 @@ const Style = () => {
         justify-content: center;
         text-align: center;
       }
+      #theme-fuwari .cluking-landing {
+        border-radius: 1rem;
+      }
+      #theme-fuwari .cluking-bento-showcase,
+      #theme-fuwari .cluking-bento-grid {
+        gap: 12px;
+      }
+      #theme-fuwari .cluking-bento-header {
+        min-height: 0;
+        border-radius: 16px;
+      }
+      #theme-fuwari .cluking-bento-card {
+        border-radius: 16px;
+        min-height: 14rem;
+      }
+      #theme-fuwari .cluking-loader {
+        width: 30px;
+      }
+      #theme-fuwari .cluking-eyebrow {
+        font-size: .58rem;
+        letter-spacing: .2em;
+        white-space: normal;
+      }
+      #theme-fuwari .cluking-signature-content {
+        padding: .9rem;
+      }
+      #theme-fuwari .cluking-sunset-svg {
+        width: min(100%, 13rem);
+        opacity: .84;
+      }
+      #theme-fuwari .cluking-signature-body {
+        font-size: .84rem;
+      }
+      #theme-fuwari .cluking-terminal-loader {
+        min-height: 12.5rem;
+        font-size: .92rem;
+      }
+      #theme-fuwari .cluking-terminal-screen {
+        padding: 3.1rem .95rem 1rem;
+      }
+      #theme-fuwari .cluking-terminal-status {
+        white-space: normal;
+        text-align: left;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1134,7 +1495,12 @@ const Style = () => {
       #theme-fuwari .fuwari-snake-orb,
       #theme-fuwari .fuwari-orbit-ring,
       #theme-fuwari .fuwari-orbit-core,
-      #theme-fuwari .fuwari-orbit-dot {
+      #theme-fuwari .fuwari-orbit-dot,
+      #theme-fuwari .cluking-loader-dash,
+      #theme-fuwari .cluking-loader-spin,
+      #theme-fuwari .cluking-signature-card,
+      #theme-fuwari .cluking-glow-disc,
+      #theme-fuwari .cluking-terminal-text {
         animation: none;
       }
       #theme-fuwari .fuwari-snake-track {
