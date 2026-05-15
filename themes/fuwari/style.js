@@ -117,188 +117,6 @@ const Style = () => {
       opacity: 1;
       transform: scale(1);
     }
-    #theme-fuwari .cyber-profile-card {
-      position: relative;
-      isolation: isolate;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 1rem;
-      overflow: hidden;
-      min-height: 15rem;
-      padding: 1rem;
-      border: 1px solid rgba(255, 255, 255, .1);
-      border-radius: 1rem;
-      background:
-        radial-gradient(circle at 18% 10%, rgba(51, 255, 131, .18), transparent 34%),
-        radial-gradient(circle at 86% 4%, rgba(202, 30, 179, .2), transparent 30%),
-        linear-gradient(180deg, rgba(20, 20, 20, .72), rgba(8, 8, 10, .84));
-      backdrop-filter: blur(16px);
-      box-shadow: 0 18px 42px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .08);
-    }
-    #theme-fuwari .cyber-profile-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 22px 22px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,.75), transparent 78%);
-      pointer-events: none;
-    }
-    #theme-fuwari .cyber-profile-scanline {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent, rgba(51, 255, 131, .12), transparent);
-      transform: translateY(-110%);
-      animation: cyber-profile-scan 4.8s ease-in-out infinite;
-      pointer-events: none;
-    }
-    #theme-fuwari .cyber-profile-core {
-      display: inline-flex;
-      width: fit-content;
-      margin: .2rem auto 0;
-      border-radius: 1.1rem;
-    }
-    #theme-fuwari .cyber-profile-avatar-shell {
-      position: relative;
-      display: inline-flex;
-      width: 64px;
-      height: 64px;
-      padding: 3px;
-      border: 1px solid rgba(51, 255, 131, .38);
-      border-radius: 1rem;
-      background: linear-gradient(135deg, rgba(51, 255, 131, .24), rgba(202, 30, 179, .18));
-      box-shadow: 0 0 15px rgba(51, 255, 131, .3), inset 0 0 10px rgba(51, 255, 131, .2);
-      transition: transform .22s ease, box-shadow .22s ease;
-    }
-    #theme-fuwari .cyber-profile-core:hover .cyber-profile-avatar-shell,
-    #theme-fuwari .cyber-profile-core:focus-visible .cyber-profile-avatar-shell {
-      transform: translateY(-1px) scale(1.04);
-      box-shadow: 0 0 22px rgba(51, 255, 131, .48), 0 0 24px rgba(202, 30, 179, .24), inset 0 0 10px rgba(51, 255, 131, .24);
-    }
-    #theme-fuwari .cyber-profile-core:focus-visible {
-      outline: 2px solid rgba(51, 255, 131, .72);
-      outline-offset: 4px;
-    }
-    #theme-fuwari .cyber-profile-avatar {
-      width: 100%;
-      height: 100%;
-      border-radius: .8rem;
-      object-fit: cover;
-      filter: saturate(1.12) contrast(1.04);
-    }
-    #theme-fuwari .cyber-profile-terminal {
-      display: grid;
-      gap: .45rem;
-      padding: .85rem .8rem;
-      border: 1px solid rgba(255, 255, 255, .07);
-      border-radius: .85rem;
-      background: rgba(3, 6, 8, .42);
-      font-family: 'Courier New', Courier, monospace;
-    }
-    #theme-fuwari .cyber-profile-row {
-      position: relative;
-      display: flex;
-      align-items: baseline;
-      gap: .45rem;
-      margin: 0;
-      padding-left: .85rem;
-      line-height: 1.5;
-    }
-    #theme-fuwari .cyber-profile-row::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: .58em;
-      width: .42rem;
-      height: .42rem;
-      border-radius: 999px;
-      background: #33ff83;
-      box-shadow: 0 0 8px rgba(51, 255, 131, .9);
-      animation: cyber-profile-cursor 1.2s steps(2, end) infinite;
-    }
-    #theme-fuwari .cyber-profile-key {
-      flex: 0 0 auto;
-      color: rgba(255, 255, 255, .34);
-      font-size: .68rem;
-      letter-spacing: .13em;
-    }
-    #theme-fuwari .cyber-profile-value {
-      min-width: 0;
-      color: #f8fff9;
-      font-size: .95rem;
-      font-weight: 900;
-      letter-spacing: .04em;
-      text-shadow: 0 0 12px rgba(51, 255, 131, .24);
-    }
-    #theme-fuwari .cyber-profile-status {
-      align-items: flex-start;
-    }
-    #theme-fuwari .cyber-profile-status-value {
-      min-width: 0;
-      color: #888;
-      font-size: .72rem;
-      letter-spacing: .08em;
-      line-height: 1.65;
-    }
-    #theme-fuwari .cyber-profile-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .45rem .65rem;
-      padding-top: .15rem;
-    }
-    #theme-fuwari .cyber-profile-link {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-      overflow: hidden;
-      color: rgba(210, 255, 228, .72);
-      font-family: 'Courier New', Courier, monospace;
-      font-size: .72rem;
-      line-height: 1;
-      letter-spacing: .04em;
-      transition: color .18s ease, transform .18s ease, text-shadow .18s ease;
-    }
-    #theme-fuwari .cyber-profile-link::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: currentColor;
-      opacity: 0;
-      transform: translateX(-110%) skewX(-18deg);
-      transition: opacity .18s ease, transform .32s ease;
-      pointer-events: none;
-    }
-    #theme-fuwari .cyber-profile-link:hover,
-    #theme-fuwari .cyber-profile-link:focus-visible {
-      color: #33ff83;
-      transform: scale(1.05);
-      text-shadow: 0 0 8px currentColor;
-    }
-    #theme-fuwari .cyber-profile-link:focus-visible {
-      outline: 1px solid currentColor;
-      outline-offset: 3px;
-    }
-    #theme-fuwari .cyber-profile-link:hover::before,
-    #theme-fuwari .cyber-profile-link:focus-visible::before {
-      opacity: .18;
-      transform: translateX(110%) skewX(-18deg);
-    }
-
-    @keyframes cyber-profile-cursor {
-      0%, 46% { opacity: 1; }
-      47%, 100% { opacity: .18; }
-    }
-    @keyframes cyber-profile-scan {
-      0%, 55% { transform: translateY(-110%); opacity: 0; }
-      64% { opacity: .85; }
-      100% { transform: translateY(110%); opacity: 0; }
-    }
 
     #theme-fuwari .fuwari-card-hover:hover .fuwari-cover-enlarge img {
       transform: scale(1.03);
@@ -1675,17 +1493,6 @@ const Style = () => {
         white-space: normal;
         text-align: left;
       }
-      #theme-fuwari .cyber-profile-card {
-        min-height: 13.5rem;
-        padding: .9rem;
-      }
-      #theme-fuwari .cyber-profile-status-value {
-        font-size: .68rem;
-        letter-spacing: .055em;
-      }
-      #theme-fuwari .cyber-profile-link {
-        font-size: .68rem;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1699,9 +1506,7 @@ const Style = () => {
       #theme-fuwari .cluking-loader-spin,
       #theme-fuwari .cluking-signature-card,
       #theme-fuwari .cluking-glow-disc,
-      #theme-fuwari .cluking-terminal-text,
-      #theme-fuwari .cyber-profile-scanline,
-      #theme-fuwari .cyber-profile-row::before {
+      #theme-fuwari .cluking-terminal-text {
         animation: none;
       }
       #theme-fuwari .fuwari-snake-track {
