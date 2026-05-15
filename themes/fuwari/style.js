@@ -800,6 +800,12 @@ const Style = () => {
       font-size: .86rem;
       line-height: 1.65;
     }
+    #theme-fuwari .cluking-signature-subtitle {
+      white-space: nowrap;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-align: center;
+    }
     #theme-fuwari .cluking-langding-stage {
       position: relative;
       display: grid;
@@ -935,7 +941,7 @@ const Style = () => {
     }
     @keyframes cluking-type-hold {
       0%, 10% { width: 0; }
-      54%, 100% { width: 8ch; }
+      54%, 100% { width: 9ch; }
     }
 
     #theme-fuwari .fuwari-list-head {

@@ -1,6 +1,7 @@
 const HomeSunsetCard = ({ config = {} }) => {
   const title = config.title || '向下扎根 · 向上生长'
-  const description = config.description || '沉到土壤深处，把每一次热爱写成新的年轮。'
+  const rawDesc = config.description || '沉到土壤深处，把每一次热爱写成新的年轮。'
+  const description = rawDesc.replace(/^[『\s]+|[』\s]+$/g, '')
 
   return (
     <div className='cluking-bento-card cluking-signature-card' aria-label='个签'>
@@ -18,7 +19,7 @@ const HomeSunsetCard = ({ config = {} }) => {
         </svg>
         <div className='cluking-signature-details'>
           <p className='cluking-signature-title'>{title}</p>
-          <p className='cluking-signature-body'>{description}</p>
+          <p className='cluking-signature-body cluking-signature-subtitle'>{description}</p>
         </div>
       </div>
     </div>

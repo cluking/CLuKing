@@ -68,4 +68,17 @@ describe('fuwari home intro', () => {
     expect(screen.getByText('online')).toBeInTheDocument()
     expect(screen.getByText('status: configured')).toBeInTheDocument()
   })
+
+  it('strips corner quotes from sunset description', () => {
+    mockThemeConfigOverrides.FUWARI_HOME_BENTO_SUNSET = {
+      title: '测试标题',
+      description: '『// COMMIT TO GROWTH. 』'
+    }
+
+    render(<LayoutIndex page={1} posts={[]} latestPosts={[]} postCount={0} />)
+
+    expect(screen.getByText('// COMMIT TO GROWTH.')).toBeInTheDocument()
+    expect(screen.queryByText('『')).not.toBeInTheDocument()
+    expect(screen.queryByText('』')).not.toBeInTheDocument()
+  })
 })
