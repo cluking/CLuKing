@@ -88,6 +88,13 @@ const CONFIG = {
   FUWARI_WIDGET_TAG_LIST: true,
   /** 侧栏头像/昵称下的「个人页」链接路径 */
   FUWARI_PROFILE_PATH: '/about',
+  /** Cyber ID 个人名片联系方式；每项配置 type / label / href / icon，href 为空则不显示 */
+  FUWARI_PROFILE_CYBER_CONTACTS: [
+    { type: 'github', label: 'GitHub', href: '', icon: 'fab fa-github' },
+    { type: 'wechat', label: 'WeChat', href: '', icon: 'fab fa-weixin' },
+    { type: 'qq', label: 'QQ', href: '', icon: 'fab fa-qq' },
+    { type: 'email', label: 'Email', href: '', icon: 'fas fa-envelope' }
+  ],
   /** 联系/社群入口卡片 */
   FUWARI_WIDGET_CONTACT: true,
   /** 侧栏广告位总开关 */
