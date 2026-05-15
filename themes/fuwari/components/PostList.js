@@ -56,12 +56,12 @@ const PostCard = ({ post }) => {
   })()
 
   return (
-    <article className='fuwari-card fuwari-card-hover p-4 relative w-full max-w-full min-w-0'>
+    <article className='fuwari-card fuwari-card-hover p-4 md:p-5 relative w-full max-w-full min-w-0'>
       <div
         className={`fuwari-post-card-grid w-full min-w-0 md:grid md:gap-4 md:items-stretch min-h-[178px]`}
         style={{ gridTemplateColumns }}>
         <div className='min-w-0 flex-1 md:pr-1'>
-          <h2 className='fuwari-post-title text-[2rem] font-bold mb-1.5 leading-tight'>
+          <h2 className='fuwari-post-title text-[1.375rem] font-bold mb-1.5 leading-tight'>
             <SmartLink href={post.href || `/${post.slug}`} className='hover:opacity-90 transition-opacity'>
               {post.title}
             </SmartLink>
@@ -96,7 +96,7 @@ const PostCard = ({ post }) => {
             )}
           </div>
           {siteConfig('FUWARI_POST_LIST_SUMMARY', true, CONFIG) && post.summary && (
-            <p className='text-sm leading-7 text-[var(--fuwari-muted)] fuwari-summary'>
+            <p className='text-[16px] leading-7 text-[var(--fuwari-muted)] fuwari-summary'>
               {post.summary}
             </p>
           )}

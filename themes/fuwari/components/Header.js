@@ -34,8 +34,8 @@ const Header = ({ locale, customNav, customMenu, searchModal }) => {
   }, [showPalette])
 
   return (
-    <header className='max-w-6xl mx-auto px-4 pt-0 pb-3 sticky top-0 z-40'>
-      <div className='fuwari-card fuwari-navbar relative px-4 py-2.5 flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr]'>
+    <header className='max-w-6xl mx-auto pt-0 pb-3 sticky top-0 z-40'>
+      <div className='fuwari-card fuwari-navbar relative px-5 py-3 flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr]'>
         <SmartLink href='/' className='text-[1.35rem] md:text-[1.45rem] font-bold fuwari-title-gradient text-left'>
           {siteConfig('TITLE')}
         </SmartLink>

@@ -3,27 +3,27 @@
 const Style = () => {
   return <style jsx global>{`
     #theme-fuwari {
-      --fuwari-bg: #f3f4f8;
-      --fuwari-bg-soft: #f6f4e8;
+      --fuwari-bg: #f0f4fb;
+      --fuwari-bg-soft: #eef2f9;
       --fuwari-surface: #ffffff;
-      --fuwari-muted: #72767d;
-      --fuwari-text: #232a37;
-      --fuwari-primary: #b8a320;
-      --fuwari-primary-soft: rgba(184, 163, 32, 0.14);
-      --fuwari-border: #e9e8df;
-      --fuwari-gradient: linear-gradient(135deg, #b8a320 0%, #e0ce63 100%);
+      --fuwari-muted: #64748b;
+      --fuwari-text: #1e293b;
+      --fuwari-primary: #2563eb;
+      --fuwari-primary-soft: rgba(37, 99, 235, 0.12);
+      --fuwari-border: #e2e8f0;
+      --fuwari-gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
     }
 
     .dark #theme-fuwari {
-      --fuwari-bg: #0d1117;
-      --fuwari-bg-soft: #131a25;
-      --fuwari-surface: #171f2c;
-      --fuwari-muted: #9ca3af;
-      --fuwari-text: #f3f4f6;
-      --fuwari-primary: #d3bf53;
-      --fuwari-primary-soft: rgba(211, 191, 83, 0.2);
-      --fuwari-border: #283446;
-      --fuwari-gradient: linear-gradient(135deg, #8576ff 0%, #4ba9ff 100%);
+      --fuwari-bg: #0a0f1a;
+      --fuwari-bg-soft: #0f1625;
+      --fuwari-surface: #111827;
+      --fuwari-muted: #94a3b8;
+      --fuwari-text: #f1f5f9;
+      --fuwari-primary: #3b82f6;
+      --fuwari-primary-soft: rgba(59, 130, 246, 0.2);
+      --fuwari-border: #1e293b;
+      --fuwari-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
     }
 
     #theme-fuwari.fuwari-bg {
@@ -36,24 +36,26 @@ const Style = () => {
     #theme-fuwari {
       transition: background-color 0.2s ease, color 0.2s ease;
       overflow-x: clip;
+      font-size: 17px;
+      line-height: 1.6;
     }
 
     #theme-fuwari .fuwari-card {
       background: var(--fuwari-surface);
       border: 1px solid var(--fuwari-border);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     #theme-fuwari .fuwari-card-hover:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 16px 40px rgba(0,0,0,0.1);
     }
 
     #theme-fuwari .fuwari-cover-wrap {
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: 12px;
     }
 
     #theme-fuwari .fuwari-cover-wrap img {
@@ -61,6 +63,22 @@ const Style = () => {
     }
     #theme-fuwari .fuwari-profile-card {
       padding: .95rem;
+    }
+    #theme-fuwari .fuwari-profile-card-polished {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    #theme-fuwari .fuwari-profile-card-polished::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: -1;
+      height: 7.5rem;
+      background:
+        radial-gradient(circle at 22% 18%, color-mix(in oklab, var(--fuwari-primary) 22%, transparent), transparent 48%),
+        linear-gradient(180deg, color-mix(in oklab, var(--fuwari-primary) 8%, transparent), transparent);
+      pointer-events: none;
     }
     #theme-fuwari .fuwari-profile-link {
       border-radius: 1rem;
@@ -130,12 +148,11 @@ const Style = () => {
     }
 
     #theme-fuwari .fuwari-navbar {
-      backdrop-filter: blur(8px);
-      background: color-mix(in oklab, var(--fuwari-surface) 86%, transparent);
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 16px;
-      border-bottom-right-radius: 16px;
+      backdrop-filter: blur(12px);
+      background: color-mix(in oklab, var(--fuwari-surface) 94%, transparent);
+      border-radius: 0 0 16px 16px;
+      border: 1px solid var(--fuwari-border);
+      border-top: none;
     }
     #theme-fuwari .fuwari-tool-btn {
       width: 2.1rem;
@@ -202,73 +219,104 @@ const Style = () => {
 
     #theme-fuwari .fuwari-hero {
       position: relative;
-      min-height: 56vh;
-      max-height: 72vh;
+      min-height: clamp(420px, 58vh, 680px);
       border-radius: 0;
       margin-top: -92px;
       padding-top: 92px;
+      background:
+        radial-gradient(circle at 18% 24%, rgba(255, 255, 255, .18), transparent 28%),
+        radial-gradient(circle at 84% 18%, color-mix(in oklab, var(--fuwari-primary) 44%, transparent), transparent 32%),
+        var(--fuwari-gradient);
     }
     #theme-fuwari .fuwari-hero-content {
-      padding-top: clamp(3.5rem, 10vh, 7rem);
-      padding-bottom: 2rem;
-    }
-    @media (max-width: 768px) {
-      #theme-fuwari .fuwari-hero {
-        min-height: 26vh;
-        max-height: 36vh;
-        margin-top: -72px;
-        padding-top: 72px;
-      }
-      #theme-fuwari .fuwari-main-overlap {
-        margin-top: -18px;
-      }
-      #theme-fuwari .fuwari-navbar {
-        border-radius: 0 0 14px 14px;
-      }
-      #theme-fuwari #posts-wrapper > article {
-        border-radius: 1rem;
-      }
-      #theme-fuwari .fuwari-post-title {
-        font-size: 2rem !important;
-      }
-      #theme-fuwari .fuwari-summary {
-        -webkit-line-clamp: 2;
-      }
-      #theme-fuwari .fuwari-profile-card {
-        margin-top: .25rem;
-      }
+      display: flex;
+      min-height: clamp(330px, 46vh, 560px);
+      flex-direction: column;
+      justify-content: center;
+      padding-top: clamp(4rem, 9vh, 7.5rem);
+      padding-bottom: clamp(4rem, 8vh, 6rem);
+      color: #fff;
     }
     #theme-fuwari .fuwari-hero-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
-      transform: scale(1.01);
-      filter: saturate(1.05);
+      transform: scale(1.015);
+      filter: saturate(1.08) contrast(1.02);
     }
     #theme-fuwari .fuwari-hero-mask {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        120deg,
-        rgba(15, 23, 42, 0.32) 0%,
-        rgba(15, 23, 42, 0.14) 55%,
-        rgba(15, 23, 42, 0.04) 100%
-      );
+      background:
+        linear-gradient(180deg, rgba(9, 14, 24, .32) 0%, rgba(9, 14, 24, .08) 46%, rgba(9, 14, 24, .78) 100%),
+        linear-gradient(112deg, rgba(9, 14, 24, .72) 0%, rgba(9, 14, 24, .34) 48%, rgba(9, 14, 24, .08) 100%);
       z-index: 1;
+    }
+    #theme-fuwari .fuwari-hero-kicker {
+      width: fit-content;
+      max-width: 100%;
+      margin-bottom: .9rem;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      backdrop-filter: blur(14px);
+      color: rgba(255, 255, 255, .9);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .22em;
+      line-height: 1;
+      overflow: hidden;
+      padding: .58rem .85rem;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    #theme-fuwari .fuwari-hero-title {
+      max-width: min(780px, 94vw);
+      margin: 0;
+      font-size: clamp(2.65rem, 8vw, 6.4rem);
+      font-weight: 900;
+      letter-spacing: -.07em;
+      line-height: .95;
+      text-wrap: balance;
+      text-shadow: 0 18px 54px rgba(0, 0, 0, .32);
+    }
+    #theme-fuwari .fuwari-hero-description {
+      max-width: 42rem;
+      margin-top: 1.1rem;
+      color: rgba(255, 255, 255, .86);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      line-height: 1.8;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+    }
+    #theme-fuwari .fuwari-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 1.5rem;
     }
     #theme-fuwari .fuwari-hero-btn {
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(255, 255, 255, .38);
+      box-shadow: 0 16px 42px rgba(0, 0, 0, .22);
       color: #111827;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.55rem 0.95rem;
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 0.72rem 1.1rem;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    #theme-fuwari .fuwari-hero-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, .28);
     }
     #theme-fuwari .fuwari-hero-btn-soft {
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.13);
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(14px);
+      box-shadow: none;
     }
     #theme-fuwari .fuwari-hero-credit {
       position: absolute;
@@ -290,6 +338,330 @@ const Style = () => {
       margin-top: -42px;
       position: relative;
       z-index: 10;
+    }
+
+    #theme-fuwari .fuwari-home {
+      min-width: 0;
+      width: 100%;
+    }
+    #theme-fuwari .fuwari-home-intro {
+      position: relative;
+      isolation: isolate;
+      border-radius: 1.35rem;
+      background:
+        linear-gradient(135deg, color-mix(in oklab, var(--fuwari-surface) 94%, transparent), color-mix(in oklab, var(--fuwari-bg-soft) 86%, var(--fuwari-surface))),
+        var(--fuwari-surface);
+    }
+    #theme-fuwari .fuwari-home-intro::before {
+      content: '';
+      position: absolute;
+      inset: -28% auto auto 48%;
+      z-index: -1;
+      width: 24rem;
+      height: 24rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, color-mix(in oklab, var(--fuwari-primary) 22%, transparent), transparent 68%);
+      pointer-events: none;
+    }
+    #theme-fuwari .fuwari-snake-track {
+      position: absolute;
+      inset: .55rem;
+      z-index: -1;
+      border-radius: 1rem;
+      opacity: .95;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    #theme-fuwari .fuwari-snake-track::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background:
+        conic-gradient(
+          from var(--fuwari-snake-angle, 0deg),
+          transparent 0deg,
+          transparent 118deg,
+          color-mix(in oklab, var(--fuwari-primary) 18%, transparent) 150deg,
+          color-mix(in oklab, var(--fuwari-primary) 88%, #06b6d4) 172deg,
+          #fff 180deg,
+          color-mix(in oklab, var(--fuwari-primary) 88%, #06b6d4) 188deg,
+          color-mix(in oklab, var(--fuwari-primary) 18%, transparent) 214deg,
+          transparent 246deg,
+          transparent 360deg
+        );
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: fuwari-snake-spin 5.2s linear infinite;
+      filter: drop-shadow(0 0 10px color-mix(in oklab, var(--fuwari-primary) 54%, transparent));
+    }
+    #theme-fuwari .fuwari-snake-track::after {
+      content: '';
+      position: absolute;
+      inset: 9%;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at var(--fuwari-snake-x, 12%) var(--fuwari-snake-y, 18%), color-mix(in oklab, var(--fuwari-primary) 16%, transparent), transparent 18%),
+        radial-gradient(circle at calc(100% - var(--fuwari-snake-x, 12%)) calc(100% - var(--fuwari-snake-y, 18%)), rgba(6, 182, 212, .13), transparent 22%);
+      animation: fuwari-snake-glow 7.4s ease-in-out infinite;
+      filter: blur(.5px);
+    }
+    #theme-fuwari .fuwari-snake-orb {
+      position: absolute;
+      width: .62rem;
+      height: .62rem;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow:
+        0 0 0 4px color-mix(in oklab, var(--fuwari-primary) 18%, transparent),
+        0 0 24px color-mix(in oklab, var(--fuwari-primary) 90%, #06b6d4),
+        0 0 48px rgba(6, 182, 212, .45);
+      transform: translate(-50%, -50%);
+    }
+    #theme-fuwari .fuwari-snake-orb-one {
+      animation: fuwari-snake-run 5.2s linear infinite;
+    }
+    #theme-fuwari .fuwari-snake-orb-two {
+      animation: fuwari-snake-run 5.2s linear infinite reverse;
+      opacity: .58;
+      scale: .72;
+    }
+    #theme-fuwari .fuwari-home-intro-main,
+    #theme-fuwari .fuwari-home-featured {
+      position: relative;
+      z-index: 1;
+    }
+    #theme-fuwari .fuwari-home-intro-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(17rem, .95fr);
+      gap: clamp(1.2rem, 4vw, 2.2rem);
+      align-items: center;
+    }
+    #theme-fuwari .fuwari-home-kicker,
+    #theme-fuwari .fuwari-list-kicker,
+    #theme-fuwari .fuwari-home-featured-label {
+      color: color-mix(in oklab, var(--fuwari-primary) 74%, var(--fuwari-muted));
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    #theme-fuwari .fuwari-home-title {
+      margin-top: .38rem;
+      color: var(--fuwari-text);
+      font-size: clamp(2rem, 5vw, 4.1rem);
+      font-weight: 900;
+      letter-spacing: -.055em;
+      line-height: 1;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
+    }
+    #theme-fuwari .fuwari-home-description {
+      max-width: 38rem;
+      margin-top: .9rem;
+      color: var(--fuwari-muted);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+    #theme-fuwari .fuwari-home-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin-top: 1.15rem;
+    }
+    #theme-fuwari .fuwari-home-action,
+    #theme-fuwari .fuwari-home-action-primary,
+    #theme-fuwari .fuwari-list-more {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      border-radius: 999px;
+      border: 1px solid color-mix(in oklab, var(--fuwari-primary) 18%, var(--fuwari-border));
+      color: color-mix(in oklab, var(--fuwari-primary) 78%, var(--fuwari-text));
+      font-size: .85rem;
+      font-weight: 800;
+      padding: .6rem .9rem;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    #theme-fuwari .fuwari-home-action-primary {
+      background: var(--fuwari-gradient);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 14px 32px color-mix(in oklab, var(--fuwari-primary) 20%, transparent);
+    }
+    #theme-fuwari .fuwari-home-action:hover,
+    #theme-fuwari .fuwari-home-action-primary:hover,
+    #theme-fuwari .fuwari-list-more:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in oklab, var(--fuwari-primary) 36%, var(--fuwari-border));
+      background: color-mix(in oklab, var(--fuwari-primary) 8%, var(--fuwari-surface));
+    }
+    #theme-fuwari .fuwari-home-action-primary:hover {
+      background: var(--fuwari-gradient);
+    }
+    #theme-fuwari .fuwari-home-showcase {
+      position: relative;
+      min-height: 18.5rem;
+      border-radius: 1.35rem;
+      overflow: hidden;
+    }
+    #theme-fuwari .fuwari-orbit-stage {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 50% 48%, color-mix(in oklab, var(--fuwari-primary) 18%, transparent), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(6, 182, 212, .16), transparent 30%),
+        linear-gradient(145deg, color-mix(in oklab, var(--fuwari-bg-soft) 74%, transparent), color-mix(in oklab, var(--fuwari-surface) 72%, transparent));
+      border: 1px solid color-mix(in oklab, var(--fuwari-primary) 14%, var(--fuwari-border));
+    }
+    #theme-fuwari .fuwari-orbit-stage::before {
+      content: '';
+      position: absolute;
+      inset: 1.1rem;
+      border-radius: 1rem;
+      background-image:
+        linear-gradient(color-mix(in oklab, var(--fuwari-primary) 9%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in oklab, var(--fuwari-primary) 9%, transparent) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at 52% 46%, #000 0 42%, transparent 74%);
+      opacity: .75;
+    }
+    #theme-fuwari .fuwari-orbit-ring {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      border: 1px solid color-mix(in oklab, var(--fuwari-primary) 34%, transparent);
+      border-radius: 999px;
+      transform: translate(-50%, -50%) rotate(var(--orbit-rotate, 0deg));
+    }
+    #theme-fuwari .fuwari-orbit-ring-one {
+      width: 14rem;
+      height: 7rem;
+      animation: fuwari-orbit-spin 9s linear infinite;
+    }
+    #theme-fuwari .fuwari-orbit-ring-two {
+      width: 16rem;
+      height: 8.25rem;
+      --orbit-rotate: 62deg;
+      animation: fuwari-orbit-spin 12s linear infinite reverse;
+    }
+    #theme-fuwari .fuwari-orbit-core {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      width: 4.6rem;
+      height: 4.6rem;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 35% 28%, #fff, rgba(255,255,255,.18) 28%, transparent 56%),
+        var(--fuwari-gradient);
+      box-shadow:
+        0 0 0 10px color-mix(in oklab, var(--fuwari-primary) 9%, transparent),
+        0 0 42px color-mix(in oklab, var(--fuwari-primary) 42%, transparent);
+      transform: translate(-50%, -50%);
+      animation: fuwari-core-pulse 3.4s ease-in-out infinite;
+    }
+    #theme-fuwari .fuwari-orbit-dot {
+      position: absolute;
+      width: .72rem;
+      height: .72rem;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 0 22px color-mix(in oklab, var(--fuwari-primary) 90%, #06b6d4);
+    }
+    #theme-fuwari .fuwari-orbit-dot-one {
+      left: 26%;
+      top: 34%;
+      animation: fuwari-dot-float 4.8s ease-in-out infinite;
+    }
+    #theme-fuwari .fuwari-orbit-dot-two {
+      right: 20%;
+      top: 48%;
+      animation: fuwari-dot-float 5.4s ease-in-out infinite reverse;
+    }
+    #theme-fuwari .fuwari-orbit-dot-three {
+      left: 48%;
+      bottom: 18%;
+      width: .48rem;
+      height: .48rem;
+      animation: fuwari-dot-float 6s ease-in-out infinite;
+    }
+    #theme-fuwari .fuwari-home-feature-card {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 2;
+      display: block;
+      border: 1px solid color-mix(in oklab, var(--fuwari-primary) 18%, rgba(255,255,255,.24));
+      border-radius: 1.05rem;
+      background: color-mix(in oklab, var(--fuwari-surface) 82%, transparent);
+      backdrop-filter: blur(16px);
+      padding: 1rem;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, .12);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    #theme-fuwari .fuwari-home-feature-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in oklab, var(--fuwari-primary) 42%, var(--fuwari-border));
+    }
+    #theme-fuwari .fuwari-home-feature-badge,
+    #theme-fuwari .fuwari-home-note-card span {
+      display: block;
+      color: color-mix(in oklab, var(--fuwari-primary) 78%, var(--fuwari-muted));
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    #theme-fuwari .fuwari-home-feature-card strong,
+    #theme-fuwari .fuwari-home-note-card strong {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      margin-top: .45rem;
+      color: var(--fuwari-text);
+      font-size: 1rem;
+      line-height: 1.45;
+      overflow: hidden;
+    }
+    #theme-fuwari .fuwari-home-feature-card small {
+      display: block;
+      margin-top: .6rem;
+      color: var(--fuwari-muted);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    #theme-fuwari .fuwari-home-note-card {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      width: min(13.5rem, calc(100% - 2rem));
+      border: 1px solid color-mix(in oklab, var(--fuwari-border) 70%, transparent);
+      border-radius: 1rem;
+      background: color-mix(in oklab, var(--fuwari-surface) 78%, transparent);
+      backdrop-filter: blur(14px);
+      padding: .85rem;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    #theme-fuwari .fuwari-home-note-card:hover {
+      transform: translateY(-2px) rotate(.5deg);
+      border-color: color-mix(in oklab, var(--fuwari-primary) 34%, var(--fuwari-border));
+    }
+    #theme-fuwari .fuwari-list-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1rem 0 .75rem;
+    }
+    #theme-fuwari .fuwari-list-more {
+      flex: 0 0 auto;
+      background: color-mix(in oklab, var(--fuwari-surface) 72%, transparent);
     }
 
     #theme-fuwari .fuwari-chip {
@@ -334,8 +706,8 @@ const Style = () => {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: .76rem;
-      color: #8c9097;
+      font-size: .9375rem;
+      color: var(--fuwari-muted);
       min-height: 1.5rem;
     }
     @media (max-width: 1023px) {
@@ -379,14 +751,14 @@ const Style = () => {
       border: 1px solid color-mix(in oklab, var(--fuwari-primary) 16%, var(--fuwari-border));
     }
     #theme-fuwari .fuwari-meta-text {
-      color: #7d838d;
+      color: var(--fuwari-muted);
     }
     #theme-fuwari .fuwari-meta-tags {
       display: inline-flex;
       align-items: center;
       gap: .28rem;
       min-height: 1.28rem;
-      color: #838892;
+      color: var(--fuwari-muted);
       flex: 0 0 auto;
     }
     #theme-fuwari .fuwari-meta-tags i {
@@ -570,6 +942,7 @@ const Style = () => {
       width: 100%;
       max-width: 100%;
       min-width: 0;
+      gap: 0.95rem;
     }
     #theme-fuwari #posts-wrapper article {
       border-radius: 1.15rem;
@@ -577,8 +950,12 @@ const Style = () => {
       min-width: 0;
       box-sizing: border-box;
     }
+    #theme-fuwari .fuwari-home #posts-wrapper article {
+      border-color: color-mix(in oklab, var(--fuwari-border) 82%, transparent);
+      box-shadow: 0 12px 34px rgba(15, 23, 42, .06);
+    }
     #theme-fuwari aside > section.fuwari-card {
-      border-radius: 1.05rem;
+      border-radius: 0.75rem;
     }
     #theme-fuwari aside .fuwari-card {
       box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
@@ -590,6 +967,181 @@ const Style = () => {
     #theme-fuwari aside .fuwari-card h3 {
       letter-spacing: .06em;
     }
+    #theme-fuwari .fuwari-side-post-link {
+      display: grid;
+      grid-template-columns: 2rem minmax(0, 1fr);
+      gap: .65rem;
+      align-items: start;
+      border-radius: .8rem;
+      color: var(--fuwari-text);
+      padding: .45rem .35rem;
+      transition: background .18s ease, color .18s ease, transform .18s ease;
+    }
+    #theme-fuwari .fuwari-side-post-link:hover {
+      background: color-mix(in oklab, var(--fuwari-primary) 7%, transparent);
+      color: var(--fuwari-primary);
+      transform: translateX(2px);
+    }
+    #theme-fuwari .fuwari-side-post-link span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: .55rem;
+      background: color-mix(in oklab, var(--fuwari-primary) 10%, var(--fuwari-surface));
+      color: color-mix(in oklab, var(--fuwari-primary) 72%, var(--fuwari-muted));
+      font-size: .7rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    #theme-fuwari .fuwari-side-post-link strong {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: .92rem;
+      font-weight: 700;
+      line-height: 1.55;
+      overflow: hidden;
+    }
+    @keyframes fuwari-snake-spin {
+      to { --fuwari-snake-angle: 360deg; }
+    }
+    @keyframes fuwari-snake-glow {
+      0%, 100% {
+        --fuwari-snake-x: 12%;
+        --fuwari-snake-y: 18%;
+        opacity: .72;
+      }
+      28% {
+        --fuwari-snake-x: 86%;
+        --fuwari-snake-y: 24%;
+        opacity: .96;
+      }
+      58% {
+        --fuwari-snake-x: 78%;
+        --fuwari-snake-y: 82%;
+        opacity: .78;
+      }
+      82% {
+        --fuwari-snake-x: 16%;
+        --fuwari-snake-y: 76%;
+        opacity: .92;
+      }
+    }
+    @keyframes fuwari-snake-run {
+      0%, 100% { left: 3%; top: 3%; }
+      24% { left: 97%; top: 3%; }
+      50% { left: 97%; top: 97%; }
+      76% { left: 3%; top: 97%; }
+    }
+    @keyframes fuwari-orbit-spin {
+      to { transform: translate(-50%, -50%) rotate(calc(var(--orbit-rotate, 0deg) + 360deg)); }
+    }
+    @keyframes fuwari-core-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(.96); opacity: .9; }
+      50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+    }
+    @keyframes fuwari-dot-float {
+      0%, 100% { transform: translate3d(0, 0, 0); opacity: .72; }
+      50% { transform: translate3d(.45rem, -.7rem, 0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      #theme-fuwari .fuwari-hero {
+        min-height: 420px;
+        margin-top: -72px;
+        padding-top: 72px;
+      }
+      #theme-fuwari .fuwari-hero-content {
+        min-height: 340px;
+        padding-top: 4.25rem;
+        padding-bottom: 4.5rem;
+      }
+      #theme-fuwari .fuwari-hero-kicker {
+        max-width: calc(100vw - 2rem);
+        font-size: .68rem;
+      }
+      #theme-fuwari .fuwari-hero-title {
+        font-size: clamp(2.35rem, 14vw, 4.2rem);
+      }
+      #theme-fuwari .fuwari-hero-actions {
+        gap: .55rem;
+      }
+      #theme-fuwari .fuwari-main-overlap {
+        margin-top: -28px;
+      }
+      #theme-fuwari .fuwari-navbar {
+        border-radius: 0 0 14px 14px;
+      }
+      #theme-fuwari .fuwari-home-intro-main {
+        grid-template-columns: 1fr;
+      }
+      #theme-fuwari .fuwari-home-showcase {
+        min-height: 17rem;
+      }
+      #theme-fuwari .fuwari-orbit-ring-one {
+        width: 12rem;
+        height: 6rem;
+      }
+      #theme-fuwari .fuwari-orbit-ring-two {
+        width: 13.5rem;
+        height: 7rem;
+      }
+      #theme-fuwari .fuwari-list-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      #theme-fuwari #posts-wrapper > article {
+        border-radius: 0.95rem;
+      }
+      #theme-fuwari .fuwari-post-title {
+        font-size: 2rem !important;
+      }
+      #theme-fuwari .fuwari-summary {
+        -webkit-line-clamp: 2;
+      }
+      #theme-fuwari .fuwari-profile-card {
+        margin-top: .25rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      #theme-fuwari .fuwari-snake-track {
+        inset: .4rem;
+        opacity: .82;
+      }
+      #theme-fuwari .fuwari-snake-orb {
+        width: .48rem;
+        height: .48rem;
+      }
+      #theme-fuwari .fuwari-home-actions,
+      #theme-fuwari .fuwari-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #theme-fuwari .fuwari-home-action,
+      #theme-fuwari .fuwari-home-action-primary,
+      #theme-fuwari .fuwari-hero-btn {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #theme-fuwari .fuwari-snake-track::before,
+      #theme-fuwari .fuwari-snake-track::after,
+      #theme-fuwari .fuwari-snake-orb,
+      #theme-fuwari .fuwari-orbit-ring,
+      #theme-fuwari .fuwari-orbit-core,
+      #theme-fuwari .fuwari-orbit-dot {
+        animation: none;
+      }
+      #theme-fuwari .fuwari-snake-track {
+        opacity: .34;
+      }
+    }
+
     #theme-fuwari .fuwari-card,
     #theme-fuwari #posts-wrapper > article {
       animation: fuwari-enter .28s ease both;
@@ -602,6 +1154,53 @@ const Style = () => {
     @keyframes fuwari-enter {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: none; }
+    }
+
+    /* 日历 */
+    #theme-fuwari .fuwari-cal-nav {
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: .5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .72rem;
+      color: var(--fuwari-muted);
+      transition: all .18s ease;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    #theme-fuwari .fuwari-cal-nav:hover {
+      color: var(--fuwari-primary);
+      background: var(--fuwari-bg-soft);
+    }
+    #theme-fuwari .fuwari-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      text-align: center;
+    }
+    #theme-fuwari .fuwari-cal-weekday {
+      font-size: .68rem;
+      color: var(--fuwari-muted);
+      padding: .25rem 0;
+    }
+    #theme-fuwari .fuwari-cal-day {
+      font-size: .78rem;
+      padding: .3rem 0;
+      border-radius: .4rem;
+      color: var(--fuwari-text);
+      transition: all .12s ease;
+    }
+    #theme-fuwari .fuwari-cal-today {
+      background: var(--fuwari-primary);
+      color: #fff;
+      font-weight: 700;
+    }
+    #theme-fuwari .fuwari-cal-has-post:not(.fuwari-cal-today) {
+      color: var(--fuwari-primary);
+      font-weight: 600;
     }
   `}</style>
 }

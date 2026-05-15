@@ -83,7 +83,91 @@ const LayoutBase = props => {
   )
 }
 
-const LayoutIndex = props => <LayoutPostList {...props} />
+const HomeIntro = ({ siteProps, locale }) => {
+  const posts = siteProps.posts || []
+  const featuredPosts = (siteProps.latestPosts?.length ? siteProps.latestPosts : posts).slice(0, 2)
+  const primaryPost = featuredPosts[0]
+  const secondaryPost = featuredPosts[1]
+  const primaryHref = primaryPost?.href || (primaryPost?.slug ? `/${primaryPost.slug}` : '/archive')
+
+  return (
+    <section className='fuwari-home-intro fuwari-card p-5 md:p-6 mb-4 overflow-hidden'>
+      <div className='fuwari-snake-track' aria-hidden='true'>
+        <span className='fuwari-snake-orb fuwari-snake-orb-one' />
+        <span className='fuwari-snake-orb fuwari-snake-orb-two' />
+      </div>
+      <div className='fuwari-home-intro-main'>
+        <div className='fuwari-home-copy min-w-0'>
+          <p className='fuwari-home-kicker'>{siteConfig('AUTHOR') || siteConfig('TITLE')}</p>
+          <h1 className='fuwari-home-title'>{siteConfig('TITLE')}</h1>
+          {siteConfig('DESCRIPTION') && (
+            <p className='fuwari-home-description'>
+              {siteConfig('DESCRIPTION')}
+            </p>
+          )}
+          <div className='fuwari-home-actions'>
+            <SmartLink href={primaryHref} className='fuwari-home-action-primary'>
+              阅读精选
+              <i className='fas fa-arrow-right' aria-hidden='true' />
+            </SmartLink>
+            <SmartLink href='/archive' className='fuwari-home-action'>
+              {locale?.NAV?.ARCHIVE || '归档'}
+            </SmartLink>
+          </div>
+        </div>
+
+        <div className='fuwari-home-showcase' aria-label='精选内容'>
+          <div className='fuwari-orbit-stage' aria-hidden='true'>
+            <span className='fuwari-orbit-ring fuwari-orbit-ring-one' />
+            <span className='fuwari-orbit-ring fuwari-orbit-ring-two' />
+            <span className='fuwari-orbit-core' />
+            <span className='fuwari-orbit-dot fuwari-orbit-dot-one' />
+            <span className='fuwari-orbit-dot fuwari-orbit-dot-two' />
+            <span className='fuwari-orbit-dot fuwari-orbit-dot-three' />
+          </div>
+          <SmartLink href={primaryHref} className='fuwari-home-feature-card'>
+            <span className='fuwari-home-feature-badge'>精选阅读</span>
+            <strong>{primaryPost?.title || siteConfig('TITLE')}</strong>
+            <small>{primaryPost?.publishDay || 'Latest'}</small>
+          </SmartLink>
+          {secondaryPost && (
+            <SmartLink
+              href={secondaryPost.href || `/${secondaryPost.slug}`}
+              className='fuwari-home-note-card'>
+              <span>下一篇灵感</span>
+              <strong>{secondaryPost.title}</strong>
+            </SmartLink>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const LayoutIndex = props => {
+  const locale = getLocale()
+  const page = Number(props.page || 1)
+  const showIntro = !Number.isFinite(page) || page <= 1
+
+  return (
+    <div className='fuwari-home'>
+      {showIntro && <HomeIntro siteProps={props} locale={locale} />}
+      <div className='fuwari-list-head'>
+        <div>
+          <p className='fuwari-list-kicker'>最新发布</p>
+          <h2 className='fuwari-section-title text-2xl font-bold'>
+            {locale?.COMMON?.LATEST_POSTS || '最新文章'}
+          </h2>
+        </div>
+        <SmartLink href='/archive' className='fuwari-list-more'>
+          {locale?.NAV?.ARCHIVE || '归档'}
+          <i className='fas fa-arrow-right' aria-hidden='true' />
+        </SmartLink>
+      </div>
+      <LayoutPostList {...props} />
+    </div>
+  )
+}
 
 const LayoutPostList = props => {
   const locale = getLocale()

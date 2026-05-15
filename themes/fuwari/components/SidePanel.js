@@ -5,6 +5,7 @@ import { useGlobal } from '@/lib/global'
 import AdCard from './AdCard'
 import AnalyticsCard from './AnalyticsCard'
 import Announcement from './Announcement'
+import Calendar from './Calendar'
 import ContactCard from './ContactCard'
 import CONFIG from '../config'
 import PluginCard from './PluginCard'
@@ -32,7 +33,7 @@ const SidePanel = props => {
 
   return (
     <aside className='space-y-4'>
-      <section className='fuwari-card fuwari-profile-card p-4'>
+      <section className='fuwari-card fuwari-profile-card fuwari-profile-card-polished p-4'>
         <SmartLink href={siteConfig('FUWARI_PROFILE_PATH', '/about', CONFIG)} className='fuwari-profile-link block mb-2.5'>
           <div className='fuwari-profile-thumb relative overflow-hidden rounded-2xl'>
             <LazyImage
@@ -77,12 +78,13 @@ const SidePanel = props => {
             {locale?.COMMON?.LATEST_POSTS || '最新发布'}
           </h3>
           <div className='space-y-2'>
-            {latestPosts.slice(0, 6).map(p => (
+            {latestPosts.slice(0, 6).map((p, index) => (
               <SmartLink
                 key={p.id}
                 href={p.href || `/${p.slug}`}
-                className='block text-[15px] leading-6 hover:text-[var(--fuwari-primary)]'>
-                {p.title}
+                className='fuwari-side-post-link'>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{p.title}</strong>
               </SmartLink>
             ))}
           </div>
@@ -123,6 +125,12 @@ const SidePanel = props => {
             ))}
           </div>
         </section>
+      )}
+
+      {siteConfig('FUWARI_WIDGET_CALENDAR', true, CONFIG) && (
+        <Calendar
+          postDates={(latestPosts || []).map(p => p.publishDay).filter(Boolean)}
+        />
       )}
 
       <ContactCard />

@@ -79,10 +79,12 @@ const CONFIG = {
   FUWARI_WIDGET_PLUGIN_AREA: true,
   /** 访问量等统计卡片 */
   FUWARI_WIDGET_ANALYTICS: true,
+  /** 日历 */
+  FUWARI_WIDGET_CALENDAR: true,
   /** 顶栏调色板内的色相滑块等；false 时展开调色板无控件 */
   FUWARI_WIDGET_THEME_COLOR_SWITCHER: true,
   /** 默认品牌色相 0–360 */
-  FUWARI_THEME_COLOR_HUE: 52,
+  FUWARI_THEME_COLOR_HUE: 217,
   /** true：隐藏顶栏调色盘按钮，无法在站内改色相 */
   FUWARI_THEME_COLOR_FIXED: false,
   /** 文章页右侧浮动区：跳转评论区按钮 */
@@ -129,6 +131,18 @@ const CONFIG = {
   FUWARI_ARTICLE_COVER_HERO: false,
   /** 文首：日期、分类、标签等元信息 */
   FUWARI_ARTICLE_META: true,
+  /** 文首：发布日期 */
+  FUWARI_ARTICLE_META_DATE: true,
+  /** 文首：最后编辑日期 */
+  FUWARI_ARTICLE_META_LAST_EDITED: true,
+  /** 文首：分类 */
+  FUWARI_ARTICLE_META_CATEGORY: true,
+  /** 文首：标签 */
+  FUWARI_ARTICLE_META_TAGS: true,
+  /** 文首：字数 */
+  FUWARI_ARTICLE_WORD_COUNT: true,
+  /** 文首：阅读时长 */
+  FUWARI_ARTICLE_READ_TIME: true,
   /** 分享条 */
   FUWARI_ARTICLE_SHARE: true,
   /** 文末版权信息块 */
