@@ -44,12 +44,19 @@ const Calendar = ({ postDates = [] }) => {
     : `${year}年${month}月`
 
   return (
-    <section className='fuwari-card p-4'>
+    <section className='fuwari-card fuwari-dashboard-widget fuwari-calendar-widget p-4'>
+      <div className='fuwari-dashboard-widget-head'>
+        <h3 className='fuwari-dashboard-widget-title'>
+          <span className='fuwari-dashboard-status-dot' aria-hidden='true' />
+          CALENDAR
+        </h3>
+        <span className='fuwari-dashboard-widget-code'>{String(month).padStart(2, '0')}/{year}</span>
+      </div>
       <div className='flex items-center justify-between mb-3'>
         <button onClick={prevMonth} className='fuwari-cal-nav' aria-label='上个月'>
           <i className='fas fa-chevron-left' />
         </button>
-        <span className='text-sm font-semibold'>{monthLabel}</span>
+        <span className='fuwari-cal-current'>{monthLabel}</span>
         <button onClick={nextMonth} className='fuwari-cal-nav' aria-label='下个月'>
           <i className='fas fa-chevron-right' />
         </button>

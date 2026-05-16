@@ -119,9 +119,9 @@ const LayoutIndex = props => {
   return (
     <div className='fuwari-home'>
       {showIntro && <HomeIntro siteProps={props} locale={locale} />}
-      <div className='fuwari-list-head'>
+      <div className='fuwari-list-head fuwari-dashboard-list-head'>
         <div>
-          <p className='fuwari-list-kicker'>最新发布</p>
+          <p className='fuwari-list-kicker'>STREAM / LATEST</p>
           <h2 className='fuwari-section-title text-2xl font-bold'>
             {locale?.COMMON?.LATEST_POSTS || '最新文章'}
           </h2>

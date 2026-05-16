@@ -950,7 +950,33 @@ const Style = () => {
       align-items: end;
       justify-content: space-between;
       gap: 1rem;
-      margin: 1rem 0 .75rem;
+      margin: 1rem 0 .9rem;
+    }
+    #theme-fuwari .fuwari-dashboard-list-head {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid color-mix(in oklab, var(--fuwari-primary) 16%, var(--fuwari-border));
+      border-radius: 1.15rem;
+      padding: .95rem 1rem;
+      background:
+        linear-gradient(135deg, color-mix(in oklab, var(--fuwari-surface) 88%, transparent), color-mix(in oklab, var(--fuwari-bg-soft) 82%, transparent)),
+        radial-gradient(circle at 8% 0%, color-mix(in oklab, var(--fuwari-primary) 14%, transparent), transparent 38%);
+      box-shadow: 0 14px 38px rgba(15, 23, 42, .07);
+    }
+    #theme-fuwari .fuwari-dashboard-list-head::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(color-mix(in oklab, var(--fuwari-border) 42%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in oklab, var(--fuwari-border) 42%, transparent) 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: .28;
+      pointer-events: none;
+    }
+    #theme-fuwari .fuwari-dashboard-list-head > * {
+      position: relative;
+      z-index: 1;
     }
     #theme-fuwari .fuwari-list-more {
       flex: 0 0 auto;
@@ -958,13 +984,24 @@ const Style = () => {
     }
 
     #theme-fuwari .fuwari-chip {
-      background: var(--fuwari-bg-soft);
-      border: 1px solid var(--fuwari-border);
+      display: inline-flex;
+      align-items: center;
+      gap: .42rem;
+      background: color-mix(in oklab, var(--fuwari-bg-soft) 78%, transparent);
+      border: 1px solid color-mix(in oklab, var(--fuwari-border) 82%, transparent);
       border-radius: 999px;
       color: var(--fuwari-muted);
       font-size: 14px;
       line-height: 1;
       padding: 0.5rem 0.8rem;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+    }
+    #theme-fuwari .fuwari-chip:hover,
+    #theme-fuwari .fuwari-chip:focus-visible {
+      color: color-mix(in oklab, var(--fuwari-primary) 76%, var(--fuwari-text));
+      border-color: color-mix(in oklab, var(--fuwari-primary) 32%, var(--fuwari-border));
+      background: color-mix(in oklab, var(--fuwari-primary) 9%, var(--fuwari-surface));
+      transform: translateY(-1px);
     }
 
     #theme-fuwari .fuwari-title-gradient {
@@ -995,11 +1032,12 @@ const Style = () => {
     #theme-fuwari .fuwari-meta-row {
       display: flex;
       align-items: center;
-      gap: .35rem .42rem;
+      gap: .38rem .48rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: .9375rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: .82rem;
       color: var(--fuwari-muted);
       min-height: 1.5rem;
     }
@@ -1023,13 +1061,20 @@ const Style = () => {
     #theme-fuwari .fuwari-meta-item {
       display: inline-flex;
       align-items: center;
-      gap: .34rem;
-      padding: 0;
-      border-radius: 0;
-      background: transparent;
-      border: none;
+      gap: .36rem;
+      padding: .22rem .46rem;
+      border-radius: .55rem;
+      background: color-mix(in oklab, var(--fuwari-bg-soft) 70%, transparent);
+      border: 1px solid color-mix(in oklab, var(--fuwari-border) 78%, transparent);
       color: #777d86;
       flex: 0 0 auto;
+      transition: border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    #theme-fuwari .fuwari-meta-item:hover,
+    #theme-fuwari .fuwari-meta-item:focus-visible {
+      color: color-mix(in oklab, var(--fuwari-primary) 72%, var(--fuwari-text));
+      border-color: color-mix(in oklab, var(--fuwari-primary) 28%, var(--fuwari-border));
+      background: color-mix(in oklab, var(--fuwari-primary) 8%, var(--fuwari-surface));
     }
     #theme-fuwari .fuwari-meta-icon {
       width: 1.1rem;
@@ -1038,7 +1083,7 @@ const Style = () => {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: .72rem;
+      font-size: .68rem;
       color: color-mix(in oklab, var(--fuwari-primary) 72%, #9aa0aa);
       background: color-mix(in oklab, var(--fuwari-primary) 13%, #faf8ed);
       border: 1px solid color-mix(in oklab, var(--fuwari-primary) 16%, var(--fuwari-border));
@@ -1049,8 +1094,12 @@ const Style = () => {
     #theme-fuwari .fuwari-meta-tags {
       display: inline-flex;
       align-items: center;
-      gap: .28rem;
+      gap: .3rem;
       min-height: 1.28rem;
+      padding: .22rem .46rem;
+      border: 1px solid color-mix(in oklab, var(--fuwari-border) 78%, transparent);
+      border-radius: .55rem;
+      background: color-mix(in oklab, var(--fuwari-bg-soft) 70%, transparent);
       color: var(--fuwari-muted);
       flex: 0 0 auto;
     }
@@ -1068,17 +1117,20 @@ const Style = () => {
     }
     #theme-fuwari .fuwari-post-title {
       position: relative;
-      padding-left: 12px;
+      padding-left: 16px;
     }
     #theme-fuwari .fuwari-post-title::before {
       content: '';
       position: absolute;
       left: 0;
-      top: .45rem;
-      width: 4px;
-      height: 1.45rem;
+      top: .42rem;
+      width: 6px;
+      height: 6px;
       border-radius: 999px;
-      background: var(--fuwari-primary);
+      background: #22c55e;
+      box-shadow:
+        0 0 0 4px color-mix(in oklab, #22c55e 16%, transparent),
+        0 0 18px color-mix(in oklab, #22c55e 42%, transparent);
     }
     #theme-fuwari .fuwari-section-title {
       position: relative;
@@ -1260,18 +1312,99 @@ const Style = () => {
     #theme-fuwari aside .fuwari-card h3 {
       letter-spacing: .06em;
     }
+    #theme-fuwari .fuwari-dashboard-widget {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border-color: color-mix(in oklab, var(--fuwari-primary) 16%, var(--fuwari-border));
+      background:
+        linear-gradient(145deg, color-mix(in oklab, var(--fuwari-surface) 88%, transparent), color-mix(in oklab, var(--fuwari-bg-soft) 76%, transparent)),
+        radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--fuwari-primary) 12%, transparent), transparent 36%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .12),
+        0 14px 34px rgba(15, 23, 42, .07);
+    }
+    #theme-fuwari .fuwari-dashboard-widget::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(color-mix(in oklab, var(--fuwari-border) 45%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in oklab, var(--fuwari-border) 45%, transparent) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: .2;
+      pointer-events: none;
+    }
+    #theme-fuwari .fuwari-dashboard-widget-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-bottom: .85rem;
+    }
+    #theme-fuwari .fuwari-dashboard-widget-title {
+      display: inline-flex;
+      align-items: center;
+      gap: .48rem;
+      margin: 0;
+      color: color-mix(in oklab, var(--fuwari-text) 82%, var(--fuwari-primary));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    #theme-fuwari .fuwari-dashboard-status-dot {
+      width: .46rem;
+      height: .46rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px color-mix(in oklab, #22c55e 16%, transparent), 0 0 16px color-mix(in oklab, #22c55e 45%, transparent);
+    }
+    #theme-fuwari .fuwari-dashboard-widget-code {
+      flex: 0 0 auto;
+      border: 1px solid color-mix(in oklab, var(--fuwari-primary) 18%, var(--fuwari-border));
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--fuwari-surface) 72%, transparent);
+      color: color-mix(in oklab, var(--fuwari-primary) 68%, var(--fuwari-muted));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: .68rem;
+      font-weight: 800;
+      line-height: 1;
+      padding: .38rem .5rem;
+    }
+    #theme-fuwari .fuwari-dashboard-chip em {
+      display: inline-flex;
+      min-width: 1.15rem;
+      height: 1.15rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--fuwari-primary) 12%, var(--fuwari-surface));
+      color: color-mix(in oklab, var(--fuwari-primary) 76%, var(--fuwari-text));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: .68rem;
+      font-style: normal;
+      font-weight: 800;
+      padding: 0 .32rem;
+    }
     #theme-fuwari .fuwari-side-post-link {
       display: grid;
       grid-template-columns: 2rem minmax(0, 1fr);
       gap: .65rem;
       align-items: start;
+      border: 1px solid transparent;
       border-radius: .8rem;
       color: var(--fuwari-text);
-      padding: .45rem .35rem;
-      transition: background .18s ease, color .18s ease, transform .18s ease;
+      padding: .55rem .45rem;
+      transition: background .18s ease, color .18s ease, transform .18s ease, border-color .18s ease;
     }
-    #theme-fuwari .fuwari-side-post-link:hover {
-      background: color-mix(in oklab, var(--fuwari-primary) 7%, transparent);
+    #theme-fuwari .fuwari-side-post-link:hover,
+    #theme-fuwari .fuwari-side-post-link:focus-visible {
+      background: color-mix(in oklab, var(--fuwari-primary) 8%, var(--fuwari-surface));
+      border-color: color-mix(in oklab, var(--fuwari-primary) 22%, transparent);
       color: var(--fuwari-primary);
       transform: translateX(2px);
     }
@@ -1281,9 +1414,11 @@ const Style = () => {
       justify-content: center;
       width: 1.65rem;
       height: 1.65rem;
+      border: 1px solid color-mix(in oklab, var(--fuwari-primary) 22%, var(--fuwari-border));
       border-radius: .55rem;
-      background: color-mix(in oklab, var(--fuwari-primary) 10%, var(--fuwari-surface));
+      background: color-mix(in oklab, var(--fuwari-primary) 9%, var(--fuwari-surface));
       color: color-mix(in oklab, var(--fuwari-primary) 72%, var(--fuwari-muted));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
       font-size: .7rem;
       font-weight: 900;
       line-height: 1;
@@ -1514,49 +1649,69 @@ const Style = () => {
 
     /* 日历 */
     #theme-fuwari .fuwari-cal-nav {
-      width: 1.65rem;
-      height: 1.65rem;
-      border-radius: .5rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: .65rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: .72rem;
       color: var(--fuwari-muted);
-      transition: all .18s ease;
-      background: transparent;
-      border: none;
+      transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
+      background: color-mix(in oklab, var(--fuwari-surface) 72%, transparent);
+      border: 1px solid color-mix(in oklab, var(--fuwari-border) 82%, transparent);
       cursor: pointer;
     }
-    #theme-fuwari .fuwari-cal-nav:hover {
+    #theme-fuwari .fuwari-cal-nav:hover,
+    #theme-fuwari .fuwari-cal-nav:focus-visible {
       color: var(--fuwari-primary);
-      background: var(--fuwari-bg-soft);
+      border-color: color-mix(in oklab, var(--fuwari-primary) 28%, var(--fuwari-border));
+      background: color-mix(in oklab, var(--fuwari-primary) 8%, var(--fuwari-surface));
+      transform: translateY(-1px);
+    }
+    #theme-fuwari .fuwari-cal-current {
+      color: var(--fuwari-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
     }
     #theme-fuwari .fuwari-cal-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
+      gap: 3px;
       text-align: center;
     }
     #theme-fuwari .fuwari-cal-weekday {
-      font-size: .68rem;
-      color: var(--fuwari-muted);
-      padding: .25rem 0;
+      color: color-mix(in oklab, var(--fuwari-muted) 76%, var(--fuwari-primary));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: .66rem;
+      font-weight: 800;
+      padding: .3rem 0;
     }
     #theme-fuwari .fuwari-cal-day {
-      font-size: .78rem;
-      padding: .3rem 0;
-      border-radius: .4rem;
+      min-height: 1.78rem;
+      border: 1px solid color-mix(in oklab, var(--fuwari-border) 66%, transparent);
+      border-radius: .48rem;
+      background: color-mix(in oklab, var(--fuwari-surface) 62%, transparent);
       color: var(--fuwari-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: .72rem;
+      line-height: 1.78rem;
       transition: all .12s ease;
     }
     #theme-fuwari .fuwari-cal-today {
       background: var(--fuwari-primary);
+      border-color: var(--fuwari-primary);
       color: #fff;
-      font-weight: 700;
+      font-weight: 800;
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--fuwari-primary) 16%, transparent);
     }
     #theme-fuwari .fuwari-cal-has-post:not(.fuwari-cal-today) {
-      color: var(--fuwari-primary);
-      font-weight: 600;
+      border-color: color-mix(in oklab, #22c55e 34%, var(--fuwari-border));
+      color: color-mix(in oklab, #22c55e 58%, var(--fuwari-text));
+      font-weight: 800;
+      box-shadow: inset 0 -2px 0 color-mix(in oklab, #22c55e 44%, transparent);
     }
   `}</style>
 }
