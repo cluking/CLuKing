@@ -1,5 +1,4 @@
 import SmartLink from '@/components/SmartLink'
-import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import AdCard from './AdCard'
@@ -8,8 +7,8 @@ import Announcement from './Announcement'
 import Calendar from './Calendar'
 import ContactCard from './ContactCard'
 import CONFIG from '../config'
+import DigitalProfileCard from './DigitalProfileCard'
 import PluginCard from './PluginCard'
-import SocialButton from './SocialButton'
 import Toc from './Toc'
 
 const SidePanel = props => {
@@ -33,29 +32,11 @@ const SidePanel = props => {
 
   return (
     <aside className='space-y-4'>
-      <section className='fuwari-card fuwari-profile-card fuwari-profile-card-polished p-4'>
-        <SmartLink href={siteConfig('FUWARI_PROFILE_PATH', '/about', CONFIG)} className='fuwari-profile-link block mb-2.5'>
-          <div className='fuwari-profile-thumb relative overflow-hidden rounded-2xl'>
-            <LazyImage
-              src={siteInfo?.icon}
-              alt={siteConfig('AUTHOR') || title}
-              className='w-full aspect-square object-cover'
-            />
-            <span className='fuwari-profile-overlay' aria-hidden='true'>
-              <i className='far fa-id-card' />
-            </span>
-          </div>
-        </SmartLink>
-        <h2 className='text-xl font-semibold mb-1'>{siteConfig('AUTHOR') || title}</h2>
-        {description && (
-          <p className='text-sm leading-6 text-[var(--fuwari-muted)]'>
-            {description}
-          </p>
-        )}
-        <div className='pt-3 mt-3 border-t border-[var(--fuwari-border)]'>
-          <SocialButton />
-        </div>
-      </section>
+      <DigitalProfileCard
+        siteInfo={siteInfo}
+        title={title}
+        description={description}
+      />
 
       {showToc && (
         <section className='fuwari-card p-4'>

@@ -2,7 +2,11 @@ import { siteConfig } from '@/lib/config'
 import { handleEmailClick } from '@/lib/plugins/mailEncrypt'
 import { useRef } from 'react'
 
-const SocialButton = () => {
+const SocialButton = ({
+  as: Wrapper = 'div',
+  className = 'flex items-center justify-center gap-2 flex-wrap',
+  ariaLabel
+}) => {
   const emailIcon = useRef(null)
   const enableRSS = siteConfig('ENABLE_RSS')
   const links = [
@@ -35,8 +39,13 @@ const SocialButton = () => {
 
   if (!finalLinks.length) return null
 
+  const wrapperProps = {
+    className,
+    ...(ariaLabel ? { 'aria-label': ariaLabel } : {})
+  }
+
   return (
-    <div className='flex items-center justify-center gap-2 flex-wrap'>
+    <Wrapper {...wrapperProps}>
       {finalLinks.map(item => {
         const href = item.isMail ? undefined : item.href
         return (
@@ -48,6 +57,20 @@ const SocialButton = () => {
                 ? e => handleEmailClick(e, emailIcon, item.href)
                 : undefined
             }
+            onKeyDown={
+              item.isMail
+                ? e => {
+                    if (e.key === ' ') {
+                      e.preventDefault()
+                    }
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleEmailClick(e, emailIcon, item.href)
+                    }
+                  }
+                : undefined
+            }
+            role={item.isMail ? 'link' : undefined}
+            tabIndex={item.isMail ? 0 : undefined}
             target={item.isMail ? undefined : '_blank'}
             rel={item.isMail ? undefined : 'noopener noreferrer'}
             aria-label={item.label}
@@ -57,7 +80,7 @@ const SocialButton = () => {
           </a>
         )
       })}
-    </div>
+    </Wrapper>
   )
 }
 
