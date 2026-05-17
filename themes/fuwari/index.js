@@ -18,6 +18,7 @@ import ArticleLock from './components/ArticleLock'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import ArticleHeroCover from './components/ArticleHeroCover'
+import AgentReport from './components/AgentReport'
 import HeroBanner from './components/HeroBanner'
 import HomeBentoHeader from './components/HomeBentoHeader'
 import HomeSunsetCard from './components/HomeSunsetCard'
@@ -288,11 +289,16 @@ const LayoutTagIndex = props => {
   )
 }
 
+const LayoutAgent = props => {
+  return <AgentReport {...props} />
+}
+
 export {
   Layout404,
   LayoutArchive,
   LayoutBase,
   LayoutCategoryIndex,
+  LayoutAgent,
   LayoutIndex,
   LayoutPostList,
   LayoutSearch,

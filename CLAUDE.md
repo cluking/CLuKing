@@ -32,6 +32,10 @@ yarn deps:install           # Install dependencies (frozen lockfile)
 
 **Node version**: See `.nvmrc` (Node 20 LTS). **Package manager**: Yarn 1.22.22 only — do not use npm/pnpm. **CI validates** `yarn install --frozen-lockfile`.
 
+### Dev server safety
+
+Do not wrap `yarn dev` inside a short-lived script that terminates its child process in `finally`, and do not stop a background task that owns the dev server unless the user explicitly asks to shut it down. A previous verification script launched `yarn dev` via `subprocess.Popen(...)` and then ran `proc.terminate()` when the script ended or was stopped, which killed the Next.js dev server and made port 3000 unavailable. Start `yarn dev` as its own background task when it needs to remain available for browser/API checks; run verification requests separately.
+
 ## Architecture
 
 ### Notion as CMS

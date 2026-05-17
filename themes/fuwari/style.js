@@ -1390,6 +1390,40 @@ const Style = () => {
       font-weight: 800;
       padding: 0 .32rem;
     }
+    #theme-fuwari .fuwari-agent-hero {
+      position: relative;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at top left, color-mix(in oklab, var(--fuwari-primary) 18%, transparent), transparent 34%),
+        radial-gradient(circle at top right, rgba(6, 182, 212, .14), transparent 28%),
+        linear-gradient(145deg, color-mix(in oklab, var(--fuwari-surface) 90%, transparent), color-mix(in oklab, var(--fuwari-bg-soft) 82%, transparent));
+    }
+    #theme-fuwari .fuwari-agent-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(color-mix(in oklab, var(--fuwari-border) 38%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in oklab, var(--fuwari-border) 38%, transparent) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: .18;
+      pointer-events: none;
+    }
+    #theme-fuwari .fuwari-agent-status-dot {
+      width: .52rem;
+      height: .52rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow:
+        0 0 0 5px color-mix(in oklab, #22c55e 16%, transparent),
+        0 0 16px color-mix(in oklab, #22c55e 42%, transparent);
+    }
+    #theme-fuwari .fuwari-agent-report-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: .9rem;
+    }
     #theme-fuwari .fuwari-side-post-link {
       display: grid;
       grid-template-columns: 2rem minmax(0, 1fr);
@@ -1536,6 +1570,9 @@ const Style = () => {
         align-items: flex-start;
         flex-direction: column;
       }
+      #theme-fuwari .fuwari-agent-report-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       #theme-fuwari #posts-wrapper > article {
         border-radius: 0.95rem;
       }
@@ -1562,6 +1599,9 @@ const Style = () => {
       #theme-fuwari .fuwari-home-actions {
         flex-direction: column;
         align-items: stretch;
+      }
+      #theme-fuwari .fuwari-agent-report-grid {
+        grid-template-columns: 1fr;
       }
       #theme-fuwari .fuwari-home-action,
       #theme-fuwari .fuwari-home-action-primary {
