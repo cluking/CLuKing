@@ -7,7 +7,6 @@ import {
   normalizeReportQuery
 } from '@/lib/aihot/report'
 
-const CACHE_CONTROL = 's-maxage=300, stale-while-revalidate=600'
 const NO_STORE_CACHE_CONTROL = 'no-store'
 const REQUEST_TIMEOUT_MS = 8000
 const INVALID_QUERY_MESSAGE = '参数不正确，请调整筛选条件后重试。'
@@ -77,7 +76,7 @@ export default async function handler(req, res) {
         ? normalizeDailyReport(payload, normalizedQuery)
         : normalizeItemsReport(payload, normalizedQuery)
 
-    res.setHeader('Cache-Control', CACHE_CONTROL)
+    res.setHeader('Cache-Control', NO_STORE_CACHE_CONTROL)
     return res.status(200).json(createSafeApiReport(report))
   } catch {
     res.setHeader('Cache-Control', NO_STORE_CACHE_CONTROL)

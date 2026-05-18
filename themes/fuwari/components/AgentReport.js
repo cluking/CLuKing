@@ -1,6 +1,7 @@
 'use client'
 
 import { siteConfig } from '@/lib/config'
+import { useRouter } from 'next/router'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import CONFIG from '../config'
 
@@ -78,7 +79,7 @@ const buildRequestUrl = ({ view, category, keyword }) => {
   }
 
   params.set('view', 'items')
-  params.set('mode', 'selected')
+  params.set('mode', 'all')
   params.set('take', '50')
 
   if (category) {
@@ -90,6 +91,30 @@ const buildRequestUrl = ({ view, category, keyword }) => {
   }
 
   return `/api/aihot/report?${params.toString()}`
+}
+
+const getAllowedValue = (value, allowedValues, fallback = '') => {
+  const scalar = Array.isArray(value) ? value[0] : value
+  return allowedValues.includes(scalar) ? scalar : fallback
+}
+
+const getQueryString = value => {
+  const scalar = Array.isArray(value) ? value[0] : value
+  return typeof scalar === 'string' ? scalar : ''
+}
+
+const buildRouteQuery = ({ view, category, keyword }) => {
+  const query = { view }
+
+  if (view === 'items' && category) {
+    query.category = category
+  }
+
+  if (view === 'items' && keyword) {
+    query.q = keyword
+  }
+
+  return query
 }
 
 const StatCard = ({ label, value }) => (
@@ -148,6 +173,7 @@ const DailyLeadCard = ({ daily, summary }) => {
 }
 
 const AgentReport = props => {
+  const router = useRouter()
   const title = siteConfig('FUWARI_AGENT_TITLE', CONFIG.FUWARI_AGENT_TITLE, CONFIG)
   const subtitle = siteConfig('FUWARI_AGENT_SUBTITLE', CONFIG.FUWARI_AGENT_SUBTITLE, CONFIG)
   const refreshInterval = Number(
@@ -158,12 +184,13 @@ const AgentReport = props => {
     )
   ) || 300000
 
-  const [report, setReport] = useState(null)
+  const hasInitialReport = Boolean(props.initialReport)
+  const [report, setReport] = useState(props.initialReport || null)
   const [view, setView] = useState('items')
   const [category, setCategory] = useState('')
   const [keyword, setKeyword] = useState('')
   const [pendingKeyword, setPendingKeyword] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(!hasInitialReport)
   const [error, setError] = useState('')
   const inFlightRef = useRef(false)
 
@@ -194,10 +221,27 @@ const AgentReport = props => {
   }, [groups])
 
   useEffect(() => {
-    if (view === 'daily') {
-      setCategory('')
-    }
-  }, [view])
+    if (!router.isReady) return
+
+    const nextView = getAllowedValue(
+      router.query?.view,
+      VIEW_OPTIONS.map(option => option.value),
+      'items'
+    )
+    const nextCategory = nextView === 'items'
+      ? getAllowedValue(
+          router.query?.category,
+          CATEGORY_OPTIONS.map(option => option.value),
+          ''
+        )
+      : ''
+    const nextKeyword = nextView === 'items' ? getQueryString(router.query?.q).trim() : ''
+
+    setView(nextView)
+    setCategory(nextCategory)
+    setKeyword(nextKeyword)
+    setPendingKeyword(nextKeyword)
+  }, [router.isReady, router.query?.category, router.query?.q, router.query?.view])
 
   useEffect(() => {
     let activeController = null
@@ -217,6 +261,7 @@ const AgentReport = props => {
 
       try {
         const response = await fetch(requestUrl, {
+          cache: 'no-store',
           signal: controller.signal,
           headers: {
             Accept: 'application/json'
@@ -251,7 +296,7 @@ const AgentReport = props => {
       }
     }
 
-    loadReport({ showLoading: true })
+    loadReport({ showLoading: !hasInitialReport })
     const timer = window.setInterval(() => {
       loadReport()
     }, refreshInterval)
@@ -261,11 +306,45 @@ const AgentReport = props => {
       inFlightRef.current = false
       window.clearInterval(timer)
     }
-  }, [requestUrl, refreshInterval])
+  }, [hasInitialReport, requestUrl, refreshInterval])
+
+  const pushReportRoute = nextState => {
+    const nextView = nextState.view ?? view
+    const nextCategory = nextView === 'items' ? nextState.category ?? category : ''
+    const nextKeyword = nextView === 'items' ? nextState.keyword ?? keyword : ''
+
+    router.push(
+      {
+        pathname: router.pathname || '/agent',
+        query: buildRouteQuery({ view: nextView, category: nextCategory, keyword: nextKeyword })
+      },
+      undefined,
+      { shallow: true, scroll: false }
+    )
+  }
+
+  const handleViewChange = nextView => {
+    setView(nextView)
+    if (nextView === 'daily') {
+      setCategory('')
+      setKeyword('')
+      setPendingKeyword('')
+    }
+    pushReportRoute({ view: nextView })
+  }
+
+  const handleCategoryChange = nextCategory => {
+    setView('items')
+    setCategory(nextCategory)
+    pushReportRoute({ view: 'items', category: nextCategory })
+  }
 
   const handleSearchSubmit = event => {
     event.preventDefault()
-    setKeyword(pendingKeyword.trim())
+    const nextKeyword = pendingKeyword.trim()
+    setView('items')
+    setKeyword(nextKeyword)
+    pushReportRoute({ view: 'items', keyword: nextKeyword })
   }
 
   return (
@@ -302,7 +381,7 @@ const AgentReport = props => {
                   type='button'
                   className='fuwari-chip'
                   aria-pressed={active}
-                  onClick={() => setView(option.value)}
+                  onClick={() => handleViewChange(option.value)}
                   style={active
                     ? {
                         color: 'var(--fuwari-primary)',
@@ -319,24 +398,20 @@ const AgentReport = props => {
           <div className='flex flex-wrap gap-2'>
             {CATEGORY_OPTIONS.map(option => {
               const active = category === option.value
-              const disabled = view === 'daily' && option.value !== ''
               return (
                 <button
                   key={option.value || 'all'}
                   type='button'
                   className='fuwari-chip'
                   aria-pressed={active}
-                  disabled={disabled}
-                  onClick={() => setCategory(option.value)}
+                  onClick={() => handleCategoryChange(option.value)}
                   style={active
                     ? {
                         color: 'var(--fuwari-primary)',
                         borderColor: 'color-mix(in oklab, var(--fuwari-primary) 32%, var(--fuwari-border))',
                         background: 'color-mix(in oklab, var(--fuwari-primary) 10%, var(--fuwari-surface))'
                       }
-                    : disabled
-                      ? { opacity: 0.5, cursor: 'not-allowed' }
-                      : undefined}>
+                    : undefined}>
                   {option.label}
                 </button>
               )

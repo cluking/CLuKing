@@ -4,12 +4,22 @@ import userEvent from '@testing-library/user-event'
 
 const mockSiteConfig = {
   FUWARI_AGENT_TITLE: 'AI HOT Agent',
-  FUWARI_AGENT_SUBTITLE: 'Latest AI HOT updates',
-  FUWARI_AGENT_REFRESH_INTERVAL: 60000
+  FUWARI_AGENT_SUBTITLE: 'Latest AI HOT updates'
 }
+const mockRouterPush = jest.fn()
+let mockRouterQuery = {}
 
 jest.mock('@/lib/config', () => ({
   siteConfig: (key, fallback) => mockSiteConfig[key] ?? fallback
+}))
+
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    isReady: true,
+    pathname: '/agent',
+    query: mockRouterQuery,
+    push: mockRouterPush
+  })
 }))
 
 const AgentReport = require('@/themes/fuwari/components/AgentReport').default
@@ -57,6 +67,8 @@ const resolveFetchRequest = async (deferred, response) => {
 describe('AgentReport', () => {
   beforeEach(() => {
     jest.useFakeTimers()
+    mockRouterQuery = {}
+    mockRouterPush.mockClear()
   })
 
   afterEach(() => {
@@ -170,6 +182,142 @@ describe('AgentReport', () => {
     expect(signals[0].aborted).toBe(true)
     expect(await screen.findByText('当前为空')).toBeInTheDocument()
     expect(screen.queryByText('The operation was aborted')).not.toBeInTheDocument()
+  })
+
+  it('updates the URL and fetches matching data when switching report filters', async () => {
+    const initialRequest = createDeferred()
+    const modelRequest = createDeferred()
+    const dailyRequest = createDeferred()
+
+    fetch
+      .mockReturnValueOnce(initialRequest.promise)
+      .mockReturnValueOnce(modelRequest.promise)
+      .mockReturnValueOnce(dailyRequest.promise)
+
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    await renderAgentReport()
+    await resolveFetchRequest(initialRequest, {
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        ok: true,
+        stats: { total: 1 },
+        groups: [
+          {
+            key: 'all',
+            label: '全部动态',
+            items: [{ id: 'all-1', title: 'All Item', url: '', source: '', publishedAt: '', summary: '' }]
+          }
+        ]
+      })
+    })
+
+    expect(await screen.findByText('All Item')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '模型' }))
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenLastCalledWith(
+        '/api/aihot/report?view=items&mode=all&take=50&category=ai-models',
+        expect.objectContaining({ cache: 'no-store' })
+      )
+    })
+    expect(mockRouterPush).toHaveBeenLastCalledWith(
+      {
+        pathname: '/agent',
+        query: { view: 'items', category: 'ai-models' }
+      },
+      undefined,
+      { shallow: true, scroll: false }
+    )
+
+    await resolveFetchRequest(modelRequest, {
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        ok: true,
+        stats: { total: 1, models: 1 },
+        groups: [
+          {
+            key: 'ai-models',
+            label: '模型发布/更新',
+            items: [{ id: 'model-1', title: 'Model Item', url: '', source: '', publishedAt: '', summary: '' }]
+          }
+        ]
+      })
+    })
+    expect(await screen.findByText('Model Item')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '每日简报' }))
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenLastCalledWith(
+        '/api/aihot/report?view=daily',
+        expect.objectContaining({ cache: 'no-store' })
+      )
+    })
+    expect(mockRouterPush).toHaveBeenLastCalledWith(
+      {
+        pathname: '/agent',
+        query: { view: 'daily' }
+      },
+      undefined,
+      { shallow: true, scroll: false }
+    )
+
+    await resolveFetchRequest(dailyRequest, {
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        ok: true,
+        stats: { total: 1 },
+        groups: [
+          {
+            key: 'daily',
+            label: '每日简报',
+            items: [{ id: 'daily-1', title: 'Daily Item', url: '', source: '', publishedAt: '', summary: '' }]
+          }
+        ],
+        daily: { date: '2026-05-17', lead: 'Daily lead' },
+        summary: 'Daily lead'
+      })
+    })
+    expect(await screen.findByText('Daily Item')).toBeInTheDocument()
+  })
+
+  it('refreshes the latest report every 15 minutes by default', async () => {
+    const initialRequest = createDeferred()
+    const refreshRequest = createDeferred()
+
+    fetch
+      .mockReturnValueOnce(initialRequest.promise)
+      .mockReturnValueOnce(refreshRequest.promise)
+
+    await renderAgentReport()
+    await resolveFetchRequest(initialRequest, {
+      ok: true,
+      json: jest.fn().mockResolvedValue({ ok: true, stats: {}, groups: [] })
+    })
+    expect(fetch).toHaveBeenCalledTimes(1)
+
+    act(() => {
+      jest.advanceTimersByTime(899999)
+    })
+    expect(fetch).toHaveBeenCalledTimes(1)
+
+    act(() => {
+      jest.advanceTimersByTime(1)
+    })
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(2)
+    })
+    expect(fetch).toHaveBeenLastCalledWith(
+      '/api/aihot/report?view=items&mode=all&take=50',
+      expect.objectContaining({ cache: 'no-store' })
+    )
+
+    await resolveFetchRequest(refreshRequest, {
+      ok: true,
+      json: jest.fn().mockResolvedValue({ ok: true, stats: {}, groups: [] })
+    })
   })
 
   it('does not start a new interval request while the previous one is still in flight', async () => {

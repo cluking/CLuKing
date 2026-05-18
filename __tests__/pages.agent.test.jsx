@@ -35,6 +35,49 @@ describe('pages/agent', () => {
     expect(fetchGlobalAllData).toHaveBeenCalledWith({ from: 'agent', locale: 'zh-CN' })
   })
 
+  it('prefetches an initial report for static HTML without exposing upstream paths', async () => {
+    fetchGlobalAllData.mockResolvedValue({
+      NOTION_CONFIG: {
+        THEME: 'endspace',
+        NEXT_REVALIDATE_SECOND: 60
+      },
+      allPages: [],
+      siteInfo: { title: 'Test site' }
+    })
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        items: [
+          {
+            id: 'server-item',
+            title: 'Server Prefetched Item',
+            url: 'https://example.com/server-item',
+            source: 'Example',
+            publishedAt: '2026-05-17T00:00:00.000Z',
+            summary: 'Already available in static HTML',
+            category: 'ai-models'
+          }
+        ]
+      })
+    })
+
+    const result = await getStaticProps({ locale: 'zh-CN' })
+    const serializedReport = JSON.stringify(result.props.initialReport)
+
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('mode=all'),
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          Accept: 'application/json',
+          'User-Agent': expect.stringContaining('aihot-skill/0.2.0')
+        })
+      })
+    )
+    expect(result.props.initialReport.groups[0].items[0].title).toBe('Server Prefetched Item')
+    expect(serializedReport).not.toContain('/api/public')
+    expect(serializedReport).not.toContain('aihot.virxact.com/api')
+  })
+
   it('renders the Fuwari Agent report even when page props include a layoutName field', () => {
     render(
       <Agent

@@ -62,7 +62,7 @@ const CONFIG = {
   // ---------------------------------------------------------------------------
   FUWARI_AGENT_TITLE: 'AI HOT 实时报告',
   FUWARI_AGENT_SUBTITLE: '聚合最新 AI 模型、产品、行业、论文与技巧动态。',
-  FUWARI_AGENT_REFRESH_INTERVAL: 300000,
+  FUWARI_AGENT_REFRESH_INTERVAL: 900000,
 
   // ---------------------------------------------------------------------------
   // 移动端

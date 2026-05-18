@@ -136,7 +136,7 @@ describe('pages/api/aihot/report', () => {
         Accept: 'application/json'
       }
     })
-    expect(res.headers['Cache-Control']).toBe('s-maxage=300, stale-while-revalidate=600')
+    expect(res.headers['Cache-Control']).toBe('no-store')
     expect(res.statusCode).toBe(200)
     expect({ ...res.jsonBody, updatedAt: 'IGNORED' }).toEqual({
       ...expected,
